@@ -1,6 +1,29 @@
 Package Management
 ==================
 
+What packages do I need?
+------------------------
+
+At a bare minimum, you need:
+
+ * `numpy <http://numpy.org>`_
+ * `matplotlib <http://matplotlib.org>`_
+
+For many / most applications, you also need:
+
+ * `astropy <www.astropy.org>`_
+ * `scipy <http://scipy.org>`_
+
+Of these, `numpy`_ and `astropy`_ are easy to install if you have a compiler,
+`matplotlib`_ has historically been very hard to install (especially on mac),
+and `scipy`_ is often difficult to install.  Most of the time, this is because
+of `dependencies <https://en.wikipedia.org/wiki/Dependency_hell>`_.
+
+Tools that ameliorate this problem are described below.
+
+Anaconda
+--------
+
 We recommend using anaconda-python, since it is the most feature-rich and
 science-friendly package manager.  It includes astropy, which few others do.
 
@@ -39,6 +62,7 @@ A list can be found at `astrobetter
 
 `Enthought <https://www.enthought.com/products/epd/>`_ distributes a product
 including matplotlib and numpy.
+
 
 `Scipy Superpack <http://fonnesbeck.github.io/ScipySuperpack/>`_ is
 mac-specific and requires the latest Xcode, but will install up-to-date scipy,
@@ -91,11 +115,11 @@ It will install any packages indexed on `the python package index`_, and it can
 install anything with an associated URL.
 
 For example, one can install any package that has an appropriate ``setup.py`` (etc.)
-and is hosted on `github <github.com>`_ or `bitbucket <bitbucket.org>`_:
+and is hosted on `github <github.com>`_ or `bitbucket <bitbucket.org>`_::
 
     pip install https://github.com/keflavich/FITS_tools/archive/master.zip
 
-or, assuming you have `git <http://git-scm.com/>`_ installed:
+or, assuming you have `git <http://git-scm.com/>`_ installed::
 
     pip install -e git+git@github.com:keflavich/FITS_tools.git#egg=FITS_tools
 
@@ -103,10 +127,16 @@ Don't use ``sudo easy_install [packagename]``.  If you hit that situation, you
 are better off switching to either conda or `virtualenv
 <http://virtualenv.readthedocs.org/en/latest/>`_.
 
+`pip`_ also allows the installation of `precompiled binary packages called
+wheels <http://wheel.readthedocs.org/en/latest/>`_, which are easy and fast to
+install.  For packages with compiled C code (e.g., scipy, scikit-learn, etc.),
+wheels can be a convenient alternative to compiling from source. See the
+`wheels package index <http://pythonwheels.com/>`_ for details.
+
 Virtualenv
 ----------
 If you don't have ``sudo`` priveleges on your machine, you can still use
-virtualenv.
+virtualenv.::
 
     $ curl -O https://pypi.python.org/packages/source/v/virtualenv/virtualenv-X.X.tar.gz
     $ tar xvfz virtualenv-X.X.tar.gz
@@ -114,7 +144,7 @@ virtualenv.
     $ python virtualenv.py myVE
 
 After you have created a virtualenv, you can "activate" it (putting the
-virtualenv's python first on your path) with the provided activate script:
+virtualenv's python first on your path) with the provided activate script::
 
     $ source bin/activate
 
@@ -138,3 +168,19 @@ python path is often overwritten.  There is a wrapper script called
 this issue by creating a ``~/.casa`` directory in which new packages can be
 installed.
 
+The setup.py file: Distribute and Setuptools
+--------------------------------------------
+
+The main requirement for a set of python files to be a "package" rather than just a
+set of scripts is the inclusion of a ``setup.py`` file that allows you to run::
+
+    python setup.py install
+
+to install it.
+
+This script will have to import one of the python distribution packages at the
+top, either `distutils <https://docs.python.org/2.7/distutils/>`_ or
+`setuptools <https://pythonhosted.org/setuptools/setuptools.html>`_.  While
+there are many details about both packages available on the web, the best
+resource to understand which is which and why is `this stackoverflow question
+<http://stackoverflow.com/questions/6344076/differences-between-distribute-distutils-setuptools-and-distutils2>`_.
