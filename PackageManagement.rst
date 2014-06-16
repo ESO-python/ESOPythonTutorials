@@ -8,6 +8,7 @@ At a bare minimum, you need:
 
  * `numpy <http://numpy.org>`_
  * `matplotlib <http://matplotlib.org>`_
+ * `ipython <ipython.org>`_
 
 For many / most applications, you also need:
 
