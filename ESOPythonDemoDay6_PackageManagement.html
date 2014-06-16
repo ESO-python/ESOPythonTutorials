@@ -341,6 +341,30 @@ ul.auto-toc {
 <div class="document" id="package-management">
 <h1 class="title">Package Management</h1>
 
+<div class="section" id="what-packages-do-i-need">
+<h1>What packages do I need?</h1>
+<p>At a bare minimum, you need:</p>
+<blockquote>
+<ul class="simple">
+<li><a class="reference external" href="http://numpy.org">numpy</a></li>
+<li><a class="reference external" href="http://matplotlib.org">matplotlib</a></li>
+</ul>
+</blockquote>
+<p>For many / most applications, you also need:</p>
+<blockquote>
+<ul class="simple">
+<li><a class="reference external" href="www.astropy.org">astropy</a></li>
+<li><a class="reference external" href="http://scipy.org">scipy</a></li>
+</ul>
+</blockquote>
+<p>Of these, <a class="reference external" href="http://numpy.org">numpy</a> and <a class="reference external" href="www.astropy.org">astropy</a> are easy to install if you have a compiler,
+<a class="reference external" href="http://matplotlib.org">matplotlib</a> has historically been very hard to install (especially on mac),
+and <a class="reference external" href="http://scipy.org">scipy</a> is often difficult to install.  Most of the time, this is because
+of <a class="reference external" href="https://en.wikipedia.org/wiki/Dependency_hell">dependencies</a>.</p>
+<p>Tools that ameliorate this problem are described below.</p>
+</div>
+<div class="section" id="anaconda">
+<h1>Anaconda</h1>
 <p>We recommend using anaconda-python, since it is the most feature-rich and
 science-friendly package manager.  It includes astropy, which few others do.</p>
 <p>First, download the appropriate installer from the <a class="reference external" href="http://continuum.io/downloads">continuum.io download page</a>:</p>
@@ -365,6 +389,7 @@ conda update conda
 <p>You can also pip install things as usual, and use <tt class="docutils literal">python setup.py install</tt>
 as usual.</p>
 <p>For more details, visit the <a class="reference external" href="http://conda.pydata.org/docs/intro.html">anaconda introduction page</a>.</p>
+</div>
 <div class="section" id="packaged-python-distributions">
 <h1>Packaged Python Distributions</h1>
 <p>A list can be found at <a class="reference external" href="http://www.astrobetter.com/wiki/tiki-index.php?page=Python+Setup+for+Astronomy">astrobetter</a>.</p>
@@ -408,27 +433,36 @@ It will install any packages indexed on <a class="reference external" href="pypi
 install anything with an associated URL.</p>
 <p>For example, one can install any package that has an appropriate <tt class="docutils literal">setup.py</tt> (etc.)
 and is hosted on <a class="reference external" href="github.com">github</a> or <a class="reference external" href="bitbucket.org">bitbucket</a>:</p>
-<blockquote>
-pip install <a class="reference external" href="https://github.com/keflavich/FITS_tools/archive/master.zip">https://github.com/keflavich/FITS_tools/archive/master.zip</a></blockquote>
+<pre class="literal-block">
+pip install https://github.com/keflavich/FITS_tools/archive/master.zip
+</pre>
 <p>or, assuming you have <a class="reference external" href="http://git-scm.com/">git</a> installed:</p>
-<blockquote>
-pip install -e <a class="reference external" href="mailto:git+git&#64;github.com">git+git&#64;github.com</a>:keflavich/FITS_tools.git#egg=FITS_tools</blockquote>
+<pre class="literal-block">
+pip install -e git+git&#64;github.com:keflavich/FITS_tools.git#egg=FITS_tools
+</pre>
 <p>Don't use <tt class="docutils literal">sudo easy_install [packagename]</tt>.  If you hit that situation, you
 are better off switching to either conda or <a class="reference external" href="http://virtualenv.readthedocs.org/en/latest/">virtualenv</a>.</p>
+<p><a class="reference external" href="https://pypi.python.org/pypi/pip">pip</a> also allows the installation of <a class="reference external" href="http://wheel.readthedocs.org/en/latest/">precompiled binary packages called
+wheels</a>, which are easy and fast to
+install.  For packages with compiled C code (e.g., scipy, scikit-learn, etc.),
+wheels can be a convenient alternative to compiling from source. See the
+<a class="reference external" href="http://pythonwheels.com/">wheels package index</a> for details.</p>
 </div>
 <div class="section" id="id1">
 <h1>Virtualenv</h1>
 <p>If you don't have <tt class="docutils literal">sudo</tt> priveleges on your machine, you can still use
-virtualenv.</p>
-<blockquote>
-$ curl -O <a class="reference external" href="https://pypi.python.org/packages/source/v/virtualenv/virtualenv-X.X.tar.gz">https://pypi.python.org/packages/source/v/virtualenv/virtualenv-X.X.tar.gz</a>
+virtualenv.:</p>
+<pre class="literal-block">
+$ curl -O https://pypi.python.org/packages/source/v/virtualenv/virtualenv-X.X.tar.gz
 $ tar xvfz virtualenv-X.X.tar.gz
 $ cd virtualenv-X.X
-$ python virtualenv.py myVE</blockquote>
+$ python virtualenv.py myVE
+</pre>
 <p>After you have created a virtualenv, you can &quot;activate&quot; it (putting the
 virtualenv's python first on your path) with the provided activate script:</p>
-<blockquote>
-$ source bin/activate</blockquote>
+<pre class="literal-block">
+$ source bin/activate
+</pre>
 </div>
 <div class="section" id="using-bleeding-edge-software-developing">
 <h1>Using bleeding-edge software &amp; developing</h1>
@@ -448,6 +482,20 @@ python path is often overwritten.  There is a wrapper script called
 <a class="reference external" href="https://github.com/radio-astro-tools/casa-python">casa-python</a> that resolves
 this issue by creating a <tt class="docutils literal"><span class="pre">~/.casa</span></tt> directory in which new packages can be
 installed.</p>
+</div>
+<div class="section" id="the-setup-py-file-distribute-and-setuptools">
+<h1>The setup.py file: Distribute and Setuptools</h1>
+<p>The main requirement for a set of python files to be a &quot;package&quot; rather than just a
+set of scripts is the inclusion of a <tt class="docutils literal">setup.py</tt> file that allows you to run:</p>
+<pre class="literal-block">
+python setup.py install
+</pre>
+<p>to install it.</p>
+<p>This script will have to import one of the python distribution packages at the
+top, either <a class="reference external" href="https://docs.python.org/2.7/distutils/">distutils</a> or
+<a class="reference external" href="https://pythonhosted.org/setuptools/setuptools.html">setuptools</a>.  While
+there are many details about both packages available on the web, the best
+resource to understand which is which and why is <a class="reference external" href="http://stackoverflow.com/questions/6344076/differences-between-distribute-distutils-setuptools-and-distutils2">this stackoverflow question</a>.</p>
 </div>
 </div>
 </body>
