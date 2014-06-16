@@ -34,12 +34,30 @@ For more details, visit the `anaconda introduction page
 Packaged Python Distributions
 -----------------------------
 
+A list can be found at `astrobetter
+<http://www.astrobetter.com/wiki/tiki-index.php?page=Python+Setup+for+Astronomy>`_.
+
 `Enthought <https://www.enthought.com/products/epd/>`_ distributes a product
 including matplotlib and numpy.
 
 `Scipy Superpack <http://fonnesbeck.github.io/ScipySuperpack/>`_ is
 mac-specific and requires the latest Xcode, but will install up-to-date scipy,
 numpy, and matplotlib.
+
+The `yt project <http://yt-project.org/>`_ is a suite of tools for visualizing
+simulated astronomical data.  It comes with a powerfull `install script
+<http://hg.yt-project.org/yt/raw/stable/doc/install_script.sh>`_ that installs
+scipy, numpy, matplotlib, h5py, and sympy.
+
+`scisoft <https://www.eso.org/sci/software/scisoft/>`_ includes some python install,
+but is not updated frequently (no updates from March 2012-June 2014).
+There is an unofficial version `for macs <http://scisoftosx.dyndns.org/>`_.
+
+OS-wide package managers can be great for python on linux, and many
+astronomical packages are kept up-to-date with these managers.  For mac, one
+can use macports, fink, or homebrew, but they are less well-maintained and
+reliable.  I don't recommend them.
+
 
 Python Versions
 ---------------
