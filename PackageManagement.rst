@@ -31,11 +31,11 @@ science-friendly package manager.  It includes astropy, which few others do.
 First, download the appropriate installer from the `continuum.io download page
 <http://continuum.io/downloads>`_::
 
-    wget http://......./Anaconda-1.9.2-MacOSX-x86_64.sh
+    curl -O http://09c8d0b2229f813c1b93-c95ac804525aac4b6dba79b00b39d1d3.r79.cf1.rackcdn.com/Anaconda-2.0.1-MacOSX-x86_64.sh
 
 Then run the command::
 
-    sh Anaconda-1.9.2-MacOSX-x86_64.sh
+    sh Anaconda-2.0.1-MacOSX-x86_64.sh
 
 and follow the instructions.  You will need to add the conda executable path,
 probably ``~/anaconda/bin``, to your path in ``.bashrc`` or ``.login`` or
@@ -62,8 +62,7 @@ A list can be found at `astrobetter
 <http://www.astrobetter.com/wiki/tiki-index.php?page=Python+Setup+for+Astronomy>`_.
 
 `Enthought <https://www.enthought.com/products/epd/>`_ distributes a product
-including matplotlib and numpy.
-
+including matplotlib, scipy, and numpy.  It includes the qt matplotlib backend.
 
 `Scipy Superpack <http://fonnesbeck.github.io/ScipySuperpack/>`_ is
 mac-specific and requires the latest Xcode, but will install up-to-date scipy,
@@ -185,3 +184,14 @@ top, either `distutils <https://docs.python.org/2.7/distutils/>`_ or
 there are many details about both packages available on the web, the best
 resource to understand which is which and why is `this stackoverflow question
 <http://stackoverflow.com/questions/6344076/differences-between-distribute-distutils-setuptools-and-distutils2>`_.
+
+
+Questions
+---------
+How do you create a virtual environment (with conda) and activate it?
+
+    curl -O http://09c8d0b2229f813c1b93-c95ac804525aac4b6dba79b00b39d1d3.r79.cf1.rackcdn.com/Anaconda-2.0.1-MacOSX-x86_64.sh
+    sh Anaconda-2.0.1-MacOSX-x86_64.sh
+    conda update conda
+    conda install numpy scipy astropy matplotlib ipython
+    echo "PATH=~/anaconda/bin:$PATH" >> ~/.bashrc
