@@ -1684,6 +1684,8 @@ In&nbsp;[1]:
     <div class="input_area">
 <div class="highlight"><pre><span class="kn">import</span> <span class="nn">warnings</span>
 <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s">&#39;ignore&#39;</span><span class="p">,</span><span class="n">message</span><span class="o">=</span><span class="s">&#39;profile&#39;</span><span class="p">)</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s">&#39;ignore&#39;</span><span class="p">,</span><span class="n">message</span><span class="o">=</span><span class="s">&#39;_astropy_init&#39;</span><span class="p">)</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s">&#39;ignore&#39;</span><span class="p">,</span><span class="n">message</span><span class="o">=</span><span class="s">&#39;ConfigurationDefaultMissingWarning &#39;</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -1755,7 +1757,7 @@ In&nbsp;[3]:
 </div>
 <div class="inner_cell">
     <div class="input_area">
-<div class="highlight"><pre><span class="n">result1</span> <span class="o">=</span> <span class="n">Simbad</span><span class="o">.</span><span class="n">query_object</span><span class="p">(</span><span class="s">&#39;M31&#39;</span><span class="p">)</span>
+<div class="highlight"><pre><span class="n">result1</span> <span class="o">=</span> <span class="n">Simbad</span><span class="o">.</span><span class="n">query_object</span><span class="p">(</span><span class="s">&#39;M 31&#39;</span><span class="p">)</span>
 <span class="n">result1</span>
 </pre></div>
 
@@ -1770,8 +1772,8 @@ In&nbsp;[3]:
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stderr output_text">
 <pre>
-/Users/adam/repos/astroquery/astroquery/simbad/core.py:791: UserWarning: Warning: The script line number 3 raised an error (recorded in the &#96;errors&#96; attribute of the result table): java.lang.StringIndexOutOfBoundsException: String index out of range: -1
-  (error.line, error.msg))
+/Users/adam/anaconda/envs/astropy27/lib/python2.7/site-packages/numpy/ma/core.py:3847: UserWarning: Warning: converting a masked element to nan.
+  warnings.warn(&quot;Warning: converting a masked element to nan.&quot;)
 
 </pre>
 </div>
@@ -1781,7 +1783,7 @@ In&nbsp;[3]:
     Out[3]:</div>
 
 <div class="output_html rendered_html output_subarea output_pyout">
-<table id="table4440875984"><thead><tr><th>MAIN_ID</th><th>RA</th><th>DEC</th><th>RA_PREC</th><th>DEC_PREC</th><th>COO_ERR_MAJA</th><th>COO_ERR_MINA</th><th>COO_ERR_ANGLE</th><th>COO_QUAL</th><th>COO_WAVELENGTH</th><th>COO_BIBCODE</th></tr></thead><thead><tr><th></th><th>&quot;h:m:s&quot;</th><th>&quot;d:m:s&quot;</th><th></th><th></th><th>mas</th><th>mas</th><th>deg</th><th></th><th></th><th></th></tr></thead></table>
+<table id="table4448961552"><thead><tr><th>MAIN_ID</th><th>RA</th><th>DEC</th><th>RA_PREC</th><th>DEC_PREC</th><th>COO_ERR_MAJA</th><th>COO_ERR_MINA</th><th>COO_ERR_ANGLE</th><th>COO_QUAL</th><th>COO_WAVELENGTH</th><th>COO_BIBCODE</th></tr></thead><thead><tr><th></th><th>&quot;h:m:s&quot;</th><th>&quot;d:m:s&quot;</th><th></th><th></th><th>mas</th><th>mas</th><th>deg</th><th></th><th></th><th></th></tr></thead><tr><td>M  31</td><td>00 42 44.330</td><td>+41 16 07.50</td><td>7</td><td>7</td><td>nan</td><td>nan</td><td>0</td><td>B</td><td>I</td><td>2006AJ....131.1163S</td></tr></table>
 </div>
 
 </div>
@@ -1797,7 +1799,7 @@ In&nbsp;[4]:
 </div>
 <div class="inner_cell">
     <div class="input_area">
-<div class="highlight"><pre><span class="n">result2</span> <span class="o">=</span> <span class="n">Simbad</span><span class="o">.</span><span class="n">query_region</span><span class="p">(</span><span class="s">&quot;05h35m17.3s -05h23m28s&quot;</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="mi">1</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">arcmin</span><span class="p">)</span>
+<div class="highlight"><pre><span class="n">result2</span> <span class="o">=</span> <span class="n">Simbad</span><span class="o">.</span><span class="n">query_region</span><span class="p">(</span><span class="s">&quot;05h35m17.3s -05d23m28s&quot;</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="mi">1</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">arcmin</span><span class="p">)</span>
 <span class="n">result2</span>
 </pre></div>
 
@@ -1815,15 +1817,13 @@ In&nbsp;[4]:
 /Users/adam/repos/astroquery/astroquery/utils/commons.py:197: UserWarning: Coordinate string is being interpreted as an ICRS coordinate.
   warnings.warn(&quot;Coordinate string is being interpreted as an ICRS coordinate.&quot;)
 WARNING: AstropyDeprecationWarning: 
-        Use to_string instead. [astropy.utils.misc]
+        Use to_string instead. [astroquery.simbad.core]
 WARNING:astropy:AstropyDeprecationWarning: 
         Use to_string instead.
 WARNING: AstropyDeprecationWarning: 
-        Use to_string instead. [astropy.utils.misc]
+        Use to_string instead. [astroquery.simbad.core]
 WARNING:astropy:AstropyDeprecationWarning: 
         Use to_string instead.
-/Users/adam/repos/astroquery/astroquery/simbad/core.py:791: UserWarning: Warning: The script line number 3 raised an error (recorded in the &#96;errors&#96; attribute of the result table): &apos;5:35:17.30000 -80:52:00.00000&apos;: No astronomical object found :
-  (error.line, error.msg))
 
 </pre>
 </div>
@@ -1833,7 +1833,7 @@ WARNING:astropy:AstropyDeprecationWarning:
     Out[4]:</div>
 
 <div class="output_html rendered_html output_subarea output_pyout">
-<table id="table4440791056"><thead><tr><th>MAIN_ID</th><th>RA</th><th>DEC</th><th>RA_PREC</th><th>DEC_PREC</th><th>COO_ERR_MAJA</th><th>COO_ERR_MINA</th><th>COO_ERR_ANGLE</th><th>COO_QUAL</th><th>COO_WAVELENGTH</th><th>COO_BIBCODE</th></tr></thead><thead><tr><th></th><th>&quot;h:m:s&quot;</th><th>&quot;d:m:s&quot;</th><th></th><th></th><th>mas</th><th>mas</th><th>deg</th><th></th><th></th><th></th></tr></thead></table>
+<table id="table4448847568"><thead><tr><th>MAIN_ID</th><th>RA</th><th>DEC</th><th>RA_PREC</th><th>DEC_PREC</th><th>COO_ERR_MAJA</th><th>COO_ERR_MINA</th><th>COO_ERR_ANGLE</th><th>COO_QUAL</th><th>COO_WAVELENGTH</th><th>COO_BIBCODE</th></tr></thead><thead><tr><th></th><th>&quot;h:m:s&quot;</th><th>&quot;d:m:s&quot;</th><th></th><th></th><th>mas</th><th>mas</th><th>deg</th><th></th><th></th><th></th></tr></thead><tr><td>M  42</td><td>05 35 17.3</td><td>-05 23 28</td><td>5</td><td>5</td><td>7500.000</td><td>7500.000</td><td>90</td><td>D</td><td></td><td>1981MNRAS.194..693L</td></tr><tr><td>[OW94] 172-237</td><td>05 35 17.20</td><td>-05 23 26.8</td><td>6</td><td>6</td><td>nan</td><td>nan</td><td>0</td><td>D</td><td></td><td>1999AJ....117.1375S</td></tr><tr><td>[OW94] 172-327</td><td>05 35 17.20</td><td>-05 23 26.8</td><td>6</td><td>6</td><td>nan</td><td>nan</td><td>0</td><td>D</td><td></td><td>1996AJ....111..846O</td></tr><tr><td>DOH  7 175-328</td><td>05 35 17.5</td><td>-05 23 28</td><td>5</td><td>5</td><td>nan</td><td>nan</td><td>0</td><td>D</td><td></td><td>2004AJ....127.3456D</td></tr><tr><td>MAX 126</td><td>05 35 17.11</td><td>-05 23 29.3</td><td>6</td><td>6</td><td>nan</td><td>nan</td><td>0</td><td>D</td><td>I</td><td>2005AJ....129.1534R</td></tr><tr><td>DOH  7 171-327</td><td>05 35 17.1</td><td>-05 23 27</td><td>5</td><td>5</td><td>nan</td><td>nan</td><td>0</td><td>D</td><td></td><td>2004AJ....127.3456D</td></tr><tr><td>MAX 125</td><td>05 35 17.11</td><td>-05 23 26.6</td><td>6</td><td>6</td><td>nan</td><td>nan</td><td>0</td><td>D</td><td>I</td><td>2005AJ....129.1534R</td></tr><tr><td>[OW94] 171-326</td><td>05 35 17.1</td><td>-05 23 26</td><td>5</td><td>5</td><td>nan</td><td>nan</td><td>0</td><td>D</td><td></td><td>2004AJ....127.3456D</td></tr><tr><td>DOH  7 171-325</td><td>05 35 17.1</td><td>-05 23 25</td><td>5</td><td>5</td><td>nan</td><td>nan</td><td>0</td><td>D</td><td></td><td>2004AJ....127.3456D</td></tr><tr><td>DOH  7 175-324</td><td>05 35 17.5</td><td>-05 23 24</td><td>5</td><td>5</td><td>nan</td><td>nan</td><td>0</td><td>D</td><td></td><td>2004AJ....127.3456D</td></tr><tr><td>GMR  2</td><td>05 35 17.57</td><td>-05 23 25.0</td><td>6</td><td>6</td><td>300.000</td><td>300.000</td><td>90</td><td>D</td><td></td><td></td></tr><tr><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td></tr><tr><td>V* V2370 Ori</td><td>05 35 20.66</td><td>-05 22 55.7</td><td>6</td><td>6</td><td>150.000</td><td>150.000</td><td>90</td><td>C</td><td>O</td><td>2009A&amp;A...502..883R</td></tr><tr><td>[OW94] 133-329</td><td>05 35 13.3</td><td>-05 23 29</td><td>5</td><td>5</td><td>nan</td><td>nan</td><td>0</td><td>D</td><td></td><td>2004AJ....127.3456D</td></tr><tr><td>V* V1399 Ori</td><td>05 35 21.0498</td><td>-05 23 49.041</td><td>8</td><td>8</td><td>300.000</td><td>300.000</td><td>90</td><td>C</td><td>M</td><td>2011ApJ...733...50M</td></tr><tr><td>DOH 14 210-351</td><td>05 35 21.0</td><td>-05 23 51</td><td>5</td><td>5</td><td>nan</td><td>nan</td><td>0</td><td>D</td><td></td><td>2004AJ....127.3456D</td></tr><tr><td>COUP J053521.2-052316</td><td>05 35 21.239</td><td>-05 23 16.95</td><td>7</td><td>7</td><td>nan</td><td>nan</td><td>0</td><td>D</td><td></td><td>2000ApJ...540.1016L</td></tr><tr><td>[H97b] 20072</td><td>05 35 16.91</td><td>-05 22 28.4</td><td>6</td><td>6</td><td>150.000</td><td>150.000</td><td>90</td><td>C</td><td>O</td><td>2009A&amp;A...502..883R</td></tr><tr><td>[OW94] 134-342</td><td>05 35 13.4</td><td>-05 23 42</td><td>5</td><td>5</td><td>nan</td><td>nan</td><td>0</td><td>D</td><td>O</td><td>2003AJ....125..277O</td></tr><tr><td>COUP J053519.1-052234</td><td>05 35 19.12</td><td>-05 22 34.6</td><td>6</td><td>6</td><td>nan</td><td>nan</td><td>0</td><td>C</td><td>O</td><td>2009ApJS..183..261D</td></tr><tr><td>[SCB99] 181</td><td>05 35 17.608</td><td>-05 22 28.24</td><td>7</td><td>7</td><td>nan</td><td>nan</td><td>0</td><td>D</td><td></td><td>1999AJ....117.1375S</td></tr><tr><td>CXOONC J053518.5-052232</td><td>05 35 18.590</td><td>-05 22 31.23</td><td>7</td><td>7</td><td>nan</td><td>nan</td><td>0</td><td>D</td><td></td><td>2005ApJS..160..319G</td></tr></table>
 </div>
 
 </div>
@@ -1864,16 +1864,6 @@ In&nbsp;[5]:
 <div class="output">
 
 
-<div class="output_area"><div class="prompt"></div>
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>
-/Users/adam/anaconda/envs/astropy27/lib/python2.7/site-packages/numpy/ma/core.py:3847: UserWarning: Warning: converting a masked element to nan.
-  warnings.warn(&quot;Warning: converting a masked element to nan.&quot;)
-
-</pre>
-</div>
-</div>
-
 <div class="output_area"><div class="prompt output_prompt">
     Out[5]:</div>
 
@@ -1896,12 +1886,71 @@ In&nbsp;[5]:
 </div>
 </div>
 </div>
-                esocat = Simbad.query_catalog('eso')
-esocat
-                
-                ngccat = Simbad.query_catalog('ngc')
-ngccat
-                
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[6]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="n">Simbad</span><span class="o">.</span><span class="n">ROW_LIMIT</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">esocat</span> <span class="o">=</span> <span class="n">Simbad</span><span class="o">.</span><span class="n">query_catalog</span><span class="p">(</span><span class="s">&#39;eso&#39;</span><span class="p">)</span>
+<span class="n">esocat</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">
+    Out[6]:</div>
+
+<div class="output_html rendered_html output_subarea output_pyout">
+<table id="table4480503760"><thead><tr><th>MAIN_ID</th><th>RA</th><th>DEC</th><th>RA_PREC</th><th>DEC_PREC</th><th>COO_ERR_MAJA</th><th>COO_ERR_MINA</th><th>COO_ERR_ANGLE</th><th>COO_QUAL</th><th>COO_WAVELENGTH</th><th>COO_BIBCODE</th></tr></thead><thead><tr><th></th><th>&quot;h:m:s&quot;</th><th>&quot;d:m:s&quot;</th><th></th><th></th><th>mas</th><th>mas</th><th>deg</th><th></th><th></th><th></th></tr></thead><tr><td>2MASS J08300740-4325465</td><td>08 30 07.41</td><td>-43 25 46.6</td><td>6</td><td>6</td><td>60.000</td><td>60.000</td><td>90</td><td>B</td><td>I</td><td>2003yCat.2246....0C</td></tr><tr><td>NGC  2573</td><td>01 41 35.091</td><td>-89 20 04.10</td><td>7</td><td>7</td><td>nan</td><td>nan</td><td>0</td><td>B</td><td>I</td><td>2006AJ....131.1163S</td></tr><tr><td>ESO   1-2</td><td>05 04 36.8</td><td>-87 34 19</td><td>5</td><td>5</td><td>8000.000</td><td>8000.000</td><td>90</td><td>D</td><td></td><td>1982ESO...C......0L</td></tr><tr><td>ESO   1-3</td><td>05 22 36.509</td><td>-87 50 50.02</td><td>7</td><td>7</td><td>nan</td><td>nan</td><td>0</td><td>B</td><td>I</td><td>2006AJ....131.1163S</td></tr><tr><td>ESO   1-4</td><td>07 49 28.813</td><td>-87 56 00.77</td><td>7</td><td>7</td><td>nan</td><td>nan</td><td>0</td><td>B</td><td>I</td><td>2006AJ....131.1163S</td></tr><tr><td>ESO   1-5</td><td>08 53 05.006</td><td>-88 05 23.00</td><td>7</td><td>7</td><td>nan</td><td>nan</td><td>0</td><td>B</td><td>I</td><td>2006AJ....131.1163S</td></tr><tr><td>ESO   1-6</td><td>14 27 20.694</td><td>-87 46 20.06</td><td>7</td><td>7</td><td>nan</td><td>nan</td><td>0</td><td>B</td><td>I</td><td>2006AJ....131.1163S</td></tr><tr><td>ESO   1-7</td><td>17 02 45.879</td><td>-88 55 01.94</td><td>7</td><td>7</td><td>nan</td><td>nan</td><td>0</td><td>B</td><td>I</td><td>2006AJ....131.1163S</td></tr><tr><td>ESO   1-8</td><td>23 07 33.618</td><td>-89 06 59.07</td><td>7</td><td>7</td><td>nan</td><td>nan</td><td>0</td><td>B</td><td>I</td><td>2006AJ....131.1163S</td></tr><tr><td>ESO   1-9</td><td>23 12 28.499</td><td>-89 07 34.42</td><td>7</td><td>7</td><td>nan</td><td>nan</td><td>0</td><td>B</td><td>I</td><td>2006AJ....131.1163S</td></tr><tr><td>NGC  2573</td><td>01 41 35.091</td><td>-89 20 04.10</td><td>7</td><td>7</td><td>nan</td><td>nan</td><td>0</td><td>B</td><td>I</td><td>2006AJ....131.1163S</td></tr><tr><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td></tr><tr><td>ESO   4-3</td><td>03 29 49.8</td><td>-87 09 41</td><td>5</td><td>5</td><td>8000.000</td><td>8000.000</td><td>90</td><td>D</td><td></td><td>1982ESO...C......0L</td></tr><tr><td>ESO   4-4</td><td>03 42 06.1</td><td>-83 53 01</td><td>5</td><td>5</td><td>8000.000</td><td>8000.000</td><td>90</td><td>D</td><td></td><td>1982ESO...C......0L</td></tr><tr><td>ESO   4-5</td><td>03 44 16.134</td><td>-83 09 12.17</td><td>7</td><td>7</td><td>nan</td><td>nan</td><td>0</td><td>B</td><td>I</td><td>2006AJ....131.1163S</td></tr><tr><td>ESO   4-6</td><td>03 49 36.9</td><td>-83 57 41</td><td>5</td><td>5</td><td>8000.000</td><td>8000.000</td><td>90</td><td>D</td><td></td><td>1982ESO...C......0L</td></tr><tr><td>IC 2051</td><td>03 52 00.818</td><td>-83 49 50.32</td><td>7</td><td>7</td><td>nan</td><td>nan</td><td>0</td><td>B</td><td>I</td><td>2006AJ....131.1163S</td></tr><tr><td>ESO   4-8</td><td>03 58 49.162</td><td>-82 30 56.99</td><td>7</td><td>7</td><td>nan</td><td>nan</td><td>0</td><td>B</td><td>I</td><td>2006AJ....131.1163S</td></tr><tr><td>ESO   4-9</td><td>03 57 53.5</td><td>-84 21 50</td><td>5</td><td>5</td><td>8000.000</td><td>8000.000</td><td>90</td><td>D</td><td></td><td>1982ESO...C......0L</td></tr><tr><td>ESO   4-10</td><td>03 59 49.135</td><td>-84 05 37.88</td><td>7</td><td>7</td><td>nan</td><td>nan</td><td>0</td><td>B</td><td>I</td><td>2006AJ....131.1163S</td></tr><tr><td>ESO   4-11</td><td>04 00 37.201</td><td>-84 22 00.20</td><td>7</td><td>7</td><td>nan</td><td>nan</td><td>0</td><td>B</td><td>I</td><td>2006AJ....131.1163S</td></tr><tr><td>ESO   4-12</td><td>04 22 19.590</td><td>-85 22 38.98</td><td>7</td><td>7</td><td>nan</td><td>nan</td><td>0</td><td>B</td><td>I</td><td>2006AJ....131.1163S</td></tr></table>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[36]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="n">ngccat</span> <span class="o">=</span> <span class="n">Simbad</span><span class="o">.</span><span class="n">query_catalog</span><span class="p">(</span><span class="s">&#39;ngc&#39;</span><span class="p">)</span>
+<span class="n">ngccat</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">
+    Out[36]:</div>
+
+<div class="output_html rendered_html output_subarea output_pyout">
+<table id="table4480394704"><thead><tr><th>MAIN_ID</th><th>RA</th><th>DEC</th><th>RA_PREC</th><th>DEC_PREC</th><th>COO_ERR_MAJA</th><th>COO_ERR_MINA</th><th>COO_ERR_ANGLE</th><th>COO_QUAL</th><th>COO_WAVELENGTH</th><th>COO_BIBCODE</th></tr></thead><thead><tr><th></th><th>&quot;h:m:s&quot;</th><th>&quot;d:m:s&quot;</th><th></th><th></th><th>mas</th><th>mas</th><th>deg</th><th></th><th></th><th></th></tr></thead><tr><td>NGC     1</td><td>00 07 15.825</td><td>+27 42 29.13</td><td>7</td><td>7</td><td>nan</td><td>nan</td><td>0</td><td>B</td><td>I</td><td>2006AJ....131.1163S</td></tr><tr><td>NGC     2</td><td>00 07 17.104</td><td>+27 40 42.13</td><td>7</td><td>7</td><td>nan</td><td>nan</td><td>0</td><td>B</td><td>I</td><td>2006AJ....131.1163S</td></tr><tr><td>NGC     3</td><td>00 07 16.804</td><td>+08 18 05.84</td><td>7</td><td>7</td><td>nan</td><td>nan</td><td>0</td><td>B</td><td>I</td><td>2006AJ....131.1163S</td></tr><tr><td>NGC     4</td><td>00 08 18.905</td><td>+08 07 15.79</td><td>7</td><td>7</td><td>nan</td><td>nan</td><td>0</td><td>B</td><td>I</td><td>2006AJ....131.1163S</td></tr><tr><td>NGC     5</td><td>00 07 48.898</td><td>+35 21 44.46</td><td>7</td><td>7</td><td>nan</td><td>nan</td><td>0</td><td>B</td><td>I</td><td>2006AJ....131.1163S</td></tr><tr><td>NGC     7</td><td>00 08 20.36</td><td>-29 55 01.2</td><td>6</td><td>6</td><td>nan</td><td>nan</td><td>0</td><td>D</td><td></td><td>2003A&amp;A...399..457S</td></tr><tr><td>NGC     8</td><td>00 08 45.3</td><td>+23 50 20</td><td>5</td><td>5</td><td>nan</td><td>nan</td><td>0</td><td>D</td><td></td><td>2000A&amp;AS..144..475P</td></tr><tr><td>NGC     9</td><td>00 08 54.713</td><td>+23 49 00.92</td><td>7</td><td>7</td><td>nan</td><td>nan</td><td>0</td><td>B</td><td>I</td><td>2006AJ....131.1163S</td></tr><tr><td>NGC    10</td><td>00 08 34.535</td><td>-33 51 29.92</td><td>7</td><td>7</td><td>nan</td><td>nan</td><td>0</td><td>B</td><td>I</td><td>2006AJ....131.1163S</td></tr><tr><td>NGC    11</td><td>00 08 42.494</td><td>+37 26 52.39</td><td>7</td><td>7</td><td>nan</td><td>nan</td><td>0</td><td>B</td><td>I</td><td>2006AJ....131.1163S</td></tr><tr><td>NGC    12</td><td>00 08 44.752</td><td>+04 36 45.12</td><td>7</td><td>7</td><td>nan</td><td>nan</td><td>0</td><td>B</td><td>I</td><td>2006AJ....131.1163S</td></tr><tr><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td></tr><tr><td>NGC    89</td><td>00 21 24.355</td><td>-48 39 55.28</td><td>7</td><td>7</td><td>nan</td><td>nan</td><td>0</td><td>B</td><td>I</td><td>2006AJ....131.1163S</td></tr><tr><td>NGC    90</td><td>00 21 51.409</td><td>+22 24 00.15</td><td>7</td><td>7</td><td>nan</td><td>nan</td><td>0</td><td>B</td><td>I</td><td>2006AJ....131.1163S</td></tr><tr><td>2MASS J00215163+2222055</td><td>00 21 51.633</td><td>+22 22 05.52</td><td>7</td><td>7</td><td>70.000</td><td>60.000</td><td>90</td><td>B</td><td>I</td><td>2003yCat.2246....0C</td></tr><tr><td>NGC    92</td><td>00 21 31.713</td><td>-48 37 29.23</td><td>7</td><td>7</td><td>nan</td><td>nan</td><td>0</td><td>B</td><td>I</td><td>2006AJ....131.1163S</td></tr><tr><td>NGC    93</td><td>00 22 03.211</td><td>+22 24 29.15</td><td>7</td><td>7</td><td>nan</td><td>nan</td><td>0</td><td>B</td><td>I</td><td>2006AJ....131.1163S</td></tr><tr><td>NGC    94</td><td>00 22 13.516</td><td>+22 28 59.22</td><td>7</td><td>7</td><td>nan</td><td>nan</td><td>0</td><td>B</td><td>I</td><td>2006AJ....131.1163S</td></tr><tr><td>NGC    95</td><td>00 22 13.528</td><td>+10 29 29.73</td><td>7</td><td>7</td><td>nan</td><td>nan</td><td>0</td><td>B</td><td>I</td><td>2006AJ....131.1163S</td></tr><tr><td>NGC    96</td><td>00 22 17.697</td><td>+22 32 46.24</td><td>7</td><td>7</td><td>nan</td><td>nan</td><td>0</td><td>B</td><td>I</td><td>2006AJ....131.1163S</td></tr><tr><td>NGC    97</td><td>00 22 29.988</td><td>+29 44 43.34</td><td>7</td><td>7</td><td>nan</td><td>nan</td><td>0</td><td>B</td><td>I</td><td>2006AJ....131.1163S</td></tr><tr><td>NGC    98</td><td>00 22 49.518</td><td>-45 16 08.43</td><td>7</td><td>7</td><td>nan</td><td>nan</td><td>0</td><td>B</td><td>I</td><td>2006AJ....131.1163S</td></tr></table>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -1911,9 +1960,38 @@ ngccat
 </div>
 </div>
 </div>
-                gins2012 = Simbad.query_bibcode('2012ApJ...758L..29G')
-gins2012
-                
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[7]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="n">gins2012</span> <span class="o">=</span> <span class="n">Simbad</span><span class="o">.</span><span class="n">query_bibobj</span><span class="p">(</span><span class="s">&#39;2012ApJ...758L..29G&#39;</span><span class="p">)</span>
+<span class="n">gins2012</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">
+    Out[7]:</div>
+
+<div class="output_html rendered_html output_subarea output_pyout">
+<table id="table4481470288"><thead><tr><th>MAIN_ID</th><th>RA</th><th>DEC</th><th>RA_PREC</th><th>DEC_PREC</th><th>COO_ERR_MAJA</th><th>COO_ERR_MINA</th><th>COO_ERR_ANGLE</th><th>COO_QUAL</th><th>COO_WAVELENGTH</th><th>COO_BIBCODE</th></tr></thead><thead><tr><th></th><th>&quot;h:m:s&quot;</th><th>&quot;d:m:s&quot;</th><th></th><th></th><th>mas</th><th>mas</th><th>deg</th><th></th><th></th><th></th></tr></thead><tr><td>M  31</td><td>00 42 44.330</td><td>+41 16 07.50</td><td>7</td><td>7</td><td>nan</td><td>nan</td><td>0</td><td>B</td><td>I</td><td>2006AJ....131.1163S</td></tr><tr><td>NAME ONC</td><td>05 35.0</td><td>-05 29</td><td>3</td><td>3</td><td>nan</td><td>nan</td><td>0</td><td>E</td><td></td><td>2007MmSAI..78..628M</td></tr><tr><td>Cl Westerlund    2</td><td>10 23 58.1</td><td>-57 45 49</td><td>5</td><td>5</td><td>nan</td><td>nan</td><td>0</td><td>D</td><td></td><td>2001MNRAS.326.1161M</td></tr><tr><td>Cl Trumpler   14</td><td>10 43 56</td><td>-59 33.0</td><td>4</td><td>4</td><td>nan</td><td>nan</td><td>0</td><td>E</td><td>O</td><td>2009MNRAS.399.2146W</td></tr><tr><td>NGC  3603</td><td>11 15 09.1</td><td>-61 16 17</td><td>5</td><td>5</td><td>3000.000</td><td>3000.000</td><td>90</td><td>D</td><td></td><td></td></tr><tr><td>NAME ARA CLUSTER</td><td>16 47 04.00</td><td>-45 51 04.9</td><td>6</td><td>6</td><td>nan</td><td>nan</td><td>0</td><td>D</td><td>O</td><td>2008A&amp;A...478..137B</td></tr><tr><td>NAME GAL CENTER</td><td>17 45 40.04</td><td>-29 00 28.1</td><td>6</td><td>6</td><td>nan</td><td>nan</td><td>0</td><td>E</td><td></td><td></td></tr><tr><td>GAL 010.472+00.026</td><td>18 08 38</td><td>-19 51.9</td><td>4</td><td>4</td><td>nan</td><td>nan</td><td>0</td><td>E</td><td>s</td><td>2012ApJ...758L..29G</td></tr><tr><td>GAL 012.209-00.104</td><td>18 12 40</td><td>-18 24.4</td><td>4</td><td>4</td><td>nan</td><td>nan</td><td>0</td><td>E</td><td>s</td><td>2012ApJ...758L..29G</td></tr><tr><td>GAL 012.627-00.016</td><td>18 13 11</td><td>-17 59.8</td><td>4</td><td>4</td><td>nan</td><td>nan</td><td>0</td><td>E</td><td>s</td><td>2012ApJ...758L..29G</td></tr><tr><td>SNR G012.8-00.2</td><td>18 14 14.0</td><td>-17 55 50</td><td>5</td><td>5</td><td>3000.000</td><td>3000.000</td><td>90</td><td>D</td><td></td><td></td></tr><tr><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td></tr><tr><td>OH  31.0   +0.0</td><td>18 47 40.97</td><td>-01 44 55.4</td><td>6</td><td>6</td><td>80.000</td><td>80.000</td><td>90</td><td>B</td><td>I</td><td>2003yCat.2246....0C</td></tr><tr><td>GAL 030.820-00.055</td><td>18 47 47</td><td>-01 54.3</td><td>4</td><td>4</td><td>nan</td><td>nan</td><td>0</td><td>E</td><td>s</td><td>2012ApJ...758L..29G</td></tr><tr><td>GAL 032.798+00.193</td><td>18 50 30</td><td>-00 01.9</td><td>4</td><td>4</td><td>nan</td><td>nan</td><td>0</td><td>E</td><td>s</td><td>2012ApJ...758L..29G</td></tr><tr><td>GAL 034.258+00.154</td><td>18 53 19</td><td>+01 15.0</td><td>4</td><td>4</td><td>nan</td><td>nan</td><td>0</td><td>E</td><td>s</td><td>2012ApJ...758L..29G</td></tr><tr><td>GAL 043.169+00.009</td><td>19 10 14</td><td>+09 06.3</td><td>4</td><td>4</td><td>nan</td><td>nan</td><td>0</td><td>E</td><td>s</td><td>2012ApJ...758L..29G</td></tr><tr><td>W 49</td><td>19 10 20</td><td>+09 07.7</td><td>4</td><td>4</td><td>nan</td><td>nan</td><td>0</td><td>E</td><td></td><td>2003A&amp;A...397..133R</td></tr><tr><td>GAL 043.164-00.031</td><td>19 10 22</td><td>+09 04.9</td><td>4</td><td>4</td><td>nan</td><td>nan</td><td>0</td><td>E</td><td>s</td><td>2012ApJ...758L..29G</td></tr><tr><td>NAME W 51 IRS 2</td><td>19 23 39.9</td><td>+14 31 06</td><td>5</td><td>5</td><td>nan</td><td>nan</td><td>0</td><td>D</td><td></td><td>2002ApJ...566..880G</td></tr><tr><td>W 51</td><td>19 23 42.0</td><td>+14 30 33</td><td>5</td><td>5</td><td>3000.000</td><td>3000.000</td><td>90</td><td>D</td><td></td><td></td></tr><tr><td>NAME W 51 Main</td><td>19 23 43.8</td><td>+14 30 37</td><td>5</td><td>5</td><td>nan</td><td>nan</td><td>0</td><td>D</td><td></td><td>1998A&amp;AS..132..211H</td></tr></table>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -1923,12 +2001,41 @@ gins2012
 </div>
 </div>
 </div>
-                customSimbad = Simbad()
-customSimbad.ROW_LIMIT = 100
-customSimbad.add_votable_fields('bibcodelist(1800-2014)')
-gins2012b = customSimbad.query_bibcode('2012ApJ...758L..29G')
-gins2012b
-                
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[8]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="n">customSimbad</span> <span class="o">=</span> <span class="n">Simbad</span><span class="p">()</span>
+<span class="n">customSimbad</span><span class="o">.</span><span class="n">ROW_LIMIT</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">customSimbad</span><span class="o">.</span><span class="n">add_votable_fields</span><span class="p">(</span><span class="s">&#39;bibcodelist(1800-2014)&#39;</span><span class="p">)</span>
+<span class="n">gins2012b</span> <span class="o">=</span> <span class="n">customSimbad</span><span class="o">.</span><span class="n">query_bibobj</span><span class="p">(</span><span class="s">&#39;2012ApJ...758L..29G&#39;</span><span class="p">)</span>
+<span class="n">gins2012b</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">
+    Out[8]:</div>
+
+<div class="output_html rendered_html output_subarea output_pyout">
+<table id="table4481437584"><thead><tr><th>MAIN_ID</th><th>RA</th><th>DEC</th><th>RA_PREC</th><th>DEC_PREC</th><th>COO_ERR_MAJA</th><th>COO_ERR_MINA</th><th>COO_ERR_ANGLE</th><th>COO_QUAL</th><th>COO_WAVELENGTH</th><th>COO_BIBCODE</th><th>BIBLIST_1800_2014</th></tr></thead><thead><tr><th></th><th>&quot;h:m:s&quot;</th><th>&quot;d:m:s&quot;</th><th></th><th></th><th>mas</th><th>mas</th><th>deg</th><th></th><th></th><th></th><th></th></tr></thead><tr><td>M  31</td><td>00 42 44.330</td><td>+41 16 07.50</td><td>7</td><td>7</td><td>nan</td><td>nan</td><td>0</td><td>B</td><td>I</td><td>2006AJ....131.1163S</td><td>7851</td></tr><tr><td>NAME ONC</td><td>05 35.0</td><td>-05 29</td><td>3</td><td>3</td><td>nan</td><td>nan</td><td>0</td><td>E</td><td></td><td>2007MmSAI..78..628M</td><td>1375</td></tr><tr><td>Cl Westerlund    2</td><td>10 23 58.1</td><td>-57 45 49</td><td>5</td><td>5</td><td>nan</td><td>nan</td><td>0</td><td>D</td><td></td><td>2001MNRAS.326.1161M</td><td>157</td></tr><tr><td>Cl Trumpler   14</td><td>10 43 56</td><td>-59 33.0</td><td>4</td><td>4</td><td>nan</td><td>nan</td><td>0</td><td>E</td><td>O</td><td>2009MNRAS.399.2146W</td><td>299</td></tr><tr><td>NGC  3603</td><td>11 15 09.1</td><td>-61 16 17</td><td>5</td><td>5</td><td>3000.000</td><td>3000.000</td><td>90</td><td>D</td><td></td><td></td><td>704</td></tr><tr><td>NAME ARA CLUSTER</td><td>16 47 04.00</td><td>-45 51 04.9</td><td>6</td><td>6</td><td>nan</td><td>nan</td><td>0</td><td>D</td><td>O</td><td>2008A&amp;A...478..137B</td><td>293</td></tr><tr><td>NAME GAL CENTER</td><td>17 45 40.04</td><td>-29 00 28.1</td><td>6</td><td>6</td><td>nan</td><td>nan</td><td>0</td><td>E</td><td></td><td></td><td>7030</td></tr><tr><td>GAL 010.472+00.026</td><td>18 08 38</td><td>-19 51.9</td><td>4</td><td>4</td><td>nan</td><td>nan</td><td>0</td><td>E</td><td>s</td><td>2012ApJ...758L..29G</td><td>1</td></tr><tr><td>GAL 012.209-00.104</td><td>18 12 40</td><td>-18 24.4</td><td>4</td><td>4</td><td>nan</td><td>nan</td><td>0</td><td>E</td><td>s</td><td>2012ApJ...758L..29G</td><td>1</td></tr><tr><td>GAL 012.627-00.016</td><td>18 13 11</td><td>-17 59.8</td><td>4</td><td>4</td><td>nan</td><td>nan</td><td>0</td><td>E</td><td>s</td><td>2012ApJ...758L..29G</td><td>1</td></tr><tr><td>SNR G012.8-00.2</td><td>18 14 14.0</td><td>-17 55 50</td><td>5</td><td>5</td><td>3000.000</td><td>3000.000</td><td>90</td><td>D</td><td></td><td></td><td>164</td></tr><tr><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td></tr><tr><td>OH  31.0   +0.0</td><td>18 47 40.97</td><td>-01 44 55.4</td><td>6</td><td>6</td><td>80.000</td><td>80.000</td><td>90</td><td>B</td><td>I</td><td>2003yCat.2246....0C</td><td>94</td></tr><tr><td>GAL 030.820-00.055</td><td>18 47 47</td><td>-01 54.3</td><td>4</td><td>4</td><td>nan</td><td>nan</td><td>0</td><td>E</td><td>s</td><td>2012ApJ...758L..29G</td><td>1</td></tr><tr><td>GAL 032.798+00.193</td><td>18 50 30</td><td>-00 01.9</td><td>4</td><td>4</td><td>nan</td><td>nan</td><td>0</td><td>E</td><td>s</td><td>2012ApJ...758L..29G</td><td>1</td></tr><tr><td>GAL 034.258+00.154</td><td>18 53 19</td><td>+01 15.0</td><td>4</td><td>4</td><td>nan</td><td>nan</td><td>0</td><td>E</td><td>s</td><td>2012ApJ...758L..29G</td><td>1</td></tr><tr><td>GAL 043.169+00.009</td><td>19 10 14</td><td>+09 06.3</td><td>4</td><td>4</td><td>nan</td><td>nan</td><td>0</td><td>E</td><td>s</td><td>2012ApJ...758L..29G</td><td>1</td></tr><tr><td>W 49</td><td>19 10 20</td><td>+09 07.7</td><td>4</td><td>4</td><td>nan</td><td>nan</td><td>0</td><td>E</td><td></td><td>2003A&amp;A...397..133R</td><td>408</td></tr><tr><td>GAL 043.164-00.031</td><td>19 10 22</td><td>+09 04.9</td><td>4</td><td>4</td><td>nan</td><td>nan</td><td>0</td><td>E</td><td>s</td><td>2012ApJ...758L..29G</td><td>1</td></tr><tr><td>NAME W 51 IRS 2</td><td>19 23 39.9</td><td>+14 31 06</td><td>5</td><td>5</td><td>nan</td><td>nan</td><td>0</td><td>D</td><td></td><td>2002ApJ...566..880G</td><td>193</td></tr><tr><td>W 51</td><td>19 23 42.0</td><td>+14 30 33</td><td>5</td><td>5</td><td>3000.000</td><td>3000.000</td><td>90</td><td>D</td><td></td><td></td><td>892</td></tr><tr><td>NAME W 51 Main</td><td>19 23 43.8</td><td>+14 30 37</td><td>5</td><td>5</td><td>nan</td><td>nan</td><td>0</td><td>D</td><td></td><td>1998A&amp;AS..132..211H</td><td>102</td></tr></table>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -1962,7 +2069,7 @@ gins2012b
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[6]:
+In&nbsp;[9]:
 </div>
 <div class="inner_cell">
     <div class="input_area">
@@ -1977,7 +2084,7 @@ In&nbsp;[6]:
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[7]:
+In&nbsp;[10]:
 </div>
 <div class="inner_cell">
     <div class="input_area">
@@ -1993,7 +2100,7 @@ In&nbsp;[7]:
 
 
 <div class="output_area"><div class="prompt output_prompt">
-    Out[7]:</div>
+    Out[10]:</div>
 
 
 <div class="output_text output_subarea output_pyout">
@@ -2037,7 +2144,7 @@ In&nbsp;[7]:
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[8]:
+In&nbsp;[11]:
 </div>
 <div class="inner_cell">
     <div class="input_area">
@@ -2061,7 +2168,7 @@ In&nbsp;[8]:
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[9]:
+In&nbsp;[12]:
 </div>
 <div class="inner_cell">
     <div class="input_area">
@@ -2150,7 +2257,7 @@ Result set
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[10]:
+In&nbsp;[13]:
 </div>
 <div class="inner_cell">
     <div class="input_area">
@@ -2166,21 +2273,11 @@ In&nbsp;[10]:
 <div class="output">
 
 
-<div class="output_area"><div class="prompt"></div>
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>
-/Users/adam/repos/astroquery/astroquery/eso/core.py:356: UserWarning: Query returned no results
-  warnings.warn(&quot;Query returned no results&quot;)
-
-</pre>
-</div>
-</div>
-
 <div class="output_area"><div class="prompt output_prompt">
-    Out[10]:</div>
+    Out[13]:</div>
 
 <div class="output_html rendered_html output_subarea output_pyout">
-<table id="table4489646032"><thead><tr><th>Object</th><th>Target Ra Dec</th><th>Target l b</th><th>ProgId</th><th>DP.ID</th><th>OB.ID</th><th>OBS.TARG.NAME</th><th>EXPTIME</th><th>DPR.CATG</th><th>DPR.TYPE</th><th>DPR.TECH</th><th>INS MODE</th><th>SEQ.ARM</th><th>DET.READ.CLOCK</th><th>INS.FILT1.NAME</th><th>INS.OPTI2.NAME</th><th>INS.OPTI3.NAME</th><th>INS.OPTI4.NAME</th><th>INS.OPTI5.NAME</th><th>DIMM S-avg</th></tr></thead><tr><td>OBJECT</td><td>05:35:21.04 -05:31:21.2</td><td>209.145487 -19.427161</td><td>288.C-5038(A)</td><td>XSHOO.2012-02-26T02:41:35.429</td><td>729629</td><td>OM-1186</td><td>5.0</td><td>ACQUISITION</td><td>OBJECT</td><td>IMAGE</td><td>IMAG</td><td>--</td><td>acetecE2V57I_ENG.clk</td><td>V</td><td>MIR</td><td>5.0x11</td><td>5.0x11</td><td>5.0x11</td><td>1.08 [0.29]</td></tr><tr><td>LAMP,AFC</td><td>05:35:20.98 -05:31:21.5</td><td>209.145458 -19.427436</td><td>288.C-5038(A)</td><td>XSHOO.2012-02-26T02:38:24.054</td><td>729629</td><td>OM-1186</td><td>1.0</td><td>CALIB</td><td>LAMP,AFC</td><td>ECHELLE</td><td>CALIB</td><td>NIR</td><td>--</td><td>V</td><td>PIN</td><td>5.0x11</td><td>5.0x11</td><td>5.0x11</td><td>1.15 [0.43]</td></tr><tr><td>LAMP,AFC</td><td>05:35:20.98 -05:31:21.5</td><td>209.145458 -19.427436</td><td>288.C-5038(A)</td><td>XSHOO.2012-02-26T02:37:50.587</td><td>729629</td><td>OM-1186</td><td>10.0</td><td>CALIB</td><td>LAMP,AFC</td><td>ECHELLE</td><td>CALIB</td><td>UVB</td><td>400k/1pt/lg/AFC</td><td>V</td><td>SLOT</td><td>Pin_0.5</td><td>Pin_0.5</td><td>Pin_0.5</td><td>1.07 [0.27]</td></tr><tr><td>LAMP,AFC</td><td>05:35:20.98 -05:31:21.5</td><td>209.145458 -19.427436</td><td>288.C-5038(A)</td><td>XSHOO.2012-02-26T02:38:45.549</td><td>729629</td><td>OM-1186</td><td>1.0</td><td>CALIB</td><td>LAMP,AFC</td><td>ECHELLE</td><td>CALIB</td><td>NIR</td><td>--</td><td>V</td><td>PIN</td><td>5.0x11</td><td>5.0x11</td><td>5.0x11</td><td>1.15 [0.43]</td></tr><tr><td>OBJECT</td><td>05:35:21.05 -05:31:21.2</td><td>209.145500 -19.427159</td><td>288.C-5038(A)</td><td>XSHOO.2012-02-26T02:42:39.138</td><td>729629</td><td>OM-1186</td><td>5.0</td><td>ACQUISITION</td><td>OBJECT</td><td>IMAGE</td><td>IMAG</td><td>--</td><td>acetecE2V57I_ENG.clk</td><td>V</td><td>MIR</td><td>5.0x11</td><td>5.0x11</td><td>5.0x11</td><td>1.06 [0.25]</td></tr><tr><td>LAMP,AFC</td><td>05:35:20.98 -05:31:21.5</td><td>209.145458 -19.427436</td><td>288.C-5038(A)</td><td>XSHOO.2012-02-26T02:38:23.908</td><td>729629</td><td>OM-1186</td><td>0.5</td><td>CALIB</td><td>LAMP,AFC</td><td>ECHELLE</td><td>CALIB</td><td>VIS</td><td>400k/1pt/lg/AFC</td><td>V</td><td>PIN</td><td>5.0x11</td><td>5.0x11</td><td>5.0x11</td><td>1.15 [0.43]</td></tr><tr><td>OM-1186</td><td>05:35:21.19 -05:31:22.5</td><td>209.146118 -19.426783</td><td>288.C-5038(A)</td><td>XSHOO.2012-02-26T02:43:29.753</td><td>729629</td><td>OM-1186</td><td>300.0</td><td>SCIENCE</td><td>OBJECT</td><td>ECHELLE,SLIT,NODDING</td><td>SLITSPEC</td><td>UVB</td><td>100k/1pt/hg</td><td>V</td><td>SLOT</td><td>0.5x11</td><td>0.4x11</td><td>0.4x11</td><td>0.98 [0.01]</td></tr><tr><td>LAMP,AFC</td><td>05:35:20.98 -05:31:21.5</td><td>209.145458 -19.427436</td><td>288.C-5038(A)</td><td>XSHOO.2012-02-26T02:38:22.688</td><td>729629</td><td>OM-1186</td><td>10.0</td><td>CALIB</td><td>LAMP,AFC</td><td>ECHELLE</td><td>CALIB</td><td>UVB</td><td>400k/1pt/lg/AFC</td><td>V</td><td>PIN</td><td>5.0x11</td><td>5.0x11</td><td>5.0x11</td><td>1.15 [0.43]</td></tr><tr><td>LAMP,AFC</td><td>05:35:20.98 -05:31:21.5</td><td>209.145458 -19.427436</td><td>288.C-5038(A)</td><td>XSHOO.2012-02-26T02:37:51.806</td><td>729629</td><td>OM-1186</td><td>0.5</td><td>CALIB</td><td>LAMP,AFC</td><td>ECHELLE</td><td>CALIB</td><td>VIS</td><td>400k/1pt/lg/AFC</td><td>V</td><td>SLOT</td><td>Pin_0.5</td><td>Pin_0.5</td><td>Pin_0.5</td><td>1.07 [0.27]</td></tr><tr><td>OM-1186</td><td>05:35:21.19 -05:31:22.5</td><td>209.146118 -19.426783</td><td>288.C-5038(A)</td><td>XSHOO.2012-02-26T02:43:38.418</td><td>729629</td><td>OM-1186</td><td>150.0</td><td>SCIENCE</td><td>OBJECT</td><td>ECHELLE,SLIT,NODDING</td><td>SLITSPEC</td><td>NIR</td><td>--</td><td>V</td><td>SLOT</td><td>0.5x11</td><td>0.4x11</td><td>0.4x11</td><td>0.98 [0.01]</td></tr><tr><td>OBJECT</td><td>05:35:21.05 -05:31:21.2</td><td>209.145500 -19.427159</td><td>288.C-5038(A)</td><td>XSHOO.2012-02-26T02:42:08.839</td><td>729629</td><td>OM-1186</td><td>5.0</td><td>ACQUISITION</td><td>OBJECT</td><td>IMAGE</td><td>IMAG</td><td>--</td><td>acetecE2V57I_ENG.clk</td><td>V</td><td>MIR</td><td>5.0x11</td><td>5.0x11</td><td>5.0x11</td><td>1.08 [0.29]</td></tr><tr><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td></tr><tr><td>LAMP,AFC</td><td>05:35:21.69 -05:34:46.9</td><td>209.200829 -19.450582</td><td>288.C-5038(A)</td><td>XSHOO.2012-03-07T01:19:29.828</td><td>729631</td><td>OM-3125</td><td>1.0</td><td>CALIB</td><td>LAMP,AFC</td><td>ECHELLE</td><td>CALIB</td><td>NIR</td><td>--</td><td>U</td><td>PIN</td><td>5.0x11</td><td>5.0x11</td><td>5.0x11</td><td>1.21 [0.51]</td></tr><tr><td>OM-3125</td><td>05:35:21.83 -05:34:47.2</td><td>209.201195 -19.450099</td><td>288.C-5038(A)</td><td>XSHOO.2012-03-07T01:24:06.503</td><td>729631</td><td>OM-3125</td><td>300.0</td><td>SCIENCE</td><td>OBJECT</td><td>ECHELLE,SLIT,NODDING</td><td>SLITSPEC</td><td>VIS</td><td>100k/1pt/hg</td><td>V</td><td>SLOT</td><td>0.5x11</td><td>0.4x11</td><td>0.4x11</td><td>1.07 [0.29]</td></tr><tr><td>LAMP,AFC</td><td>05:35:21.69 -05:34:46.9</td><td>209.200829 -19.450582</td><td>288.C-5038(A)</td><td>XSHOO.2012-03-07T01:19:29.680</td><td>729631</td><td>OM-3125</td><td>0.5</td><td>CALIB</td><td>LAMP,AFC</td><td>ECHELLE</td><td>CALIB</td><td>VIS</td><td>400k/1pt/lg/AFC</td><td>U</td><td>PIN</td><td>5.0x11</td><td>5.0x11</td><td>5.0x11</td><td>1.21 [0.51]</td></tr><tr><td>OM-3125</td><td>05:35:21.56 -05:34:44.3</td><td>209.199891 -19.450737</td><td>288.C-5038(A)</td><td>XSHOO.2012-03-07T01:31:58.691</td><td>729631</td><td>OM-3125</td><td>300.0</td><td>SCIENCE</td><td>OBJECT</td><td>ECHELLE,SLIT,NODDING</td><td>SLITSPEC</td><td>VIS</td><td>100k/1pt/hg</td><td>V</td><td>SLOT</td><td>0.5x11</td><td>0.4x11</td><td>0.4x11</td><td>1.31 [0.64]</td></tr><tr><td>OM-3125</td><td>05:35:21.83 -05:34:47.2</td><td>209.201195 -19.450099</td><td>288.C-5038(A)</td><td>XSHOO.2012-03-07T01:24:09.816</td><td>729631</td><td>OM-3125</td><td>150.0</td><td>SCIENCE</td><td>OBJECT</td><td>ECHELLE,SLIT,NODDING</td><td>SLITSPEC</td><td>NIR</td><td>--</td><td>V</td><td>SLOT</td><td>0.5x11</td><td>0.4x11</td><td>0.4x11</td><td>1.10 [0.34]</td></tr><tr><td>OBJECT</td><td>05:35:21.69 -05:34:45.7</td><td>209.200538 -19.450416</td><td>288.C-5038(A)</td><td>XSHOO.2012-03-07T01:23:19.679</td><td>729631</td><td>OM-3125</td><td>3.0</td><td>ACQUISITION</td><td>OBJECT</td><td>IMAGE</td><td>IMAG</td><td>--</td><td>acetecE2V57I_ENG.clk</td><td>V</td><td>MIR</td><td>5.0x11</td><td>5.0x11</td><td>5.0x11</td><td>1.17 [0.45]</td></tr><tr><td>OM-3125</td><td>05:35:21.83 -05:34:47.2</td><td>209.201195 -19.450099</td><td>288.C-5038(A)</td><td>XSHOO.2012-03-07T01:47:32.118</td><td>729631</td><td>OM-3125</td><td>300.0</td><td>SCIENCE</td><td>OBJECT</td><td>ECHELLE,SLIT,NODDING</td><td>SLITSPEC</td><td>UVB</td><td>100k/1pt/hg</td><td>V</td><td>SLOT</td><td>0.5x11</td><td>0.4x11</td><td>0.4x11</td><td>1.20 [0.50]</td></tr><tr><td>OM-3125</td><td>05:35:21.56 -05:34:44.3</td><td>209.199891 -19.450737</td><td>288.C-5038(A)</td><td>XSHOO.2012-03-07T01:39:45.039</td><td>729631</td><td>OM-3125</td><td>300.0</td><td>SCIENCE</td><td>OBJECT</td><td>ECHELLE,SLIT,NODDING</td><td>SLITSPEC</td><td>VIS</td><td>100k/1pt/hg</td><td>V</td><td>SLOT</td><td>0.5x11</td><td>0.4x11</td><td>0.4x11</td><td>1.25 [0.58]</td></tr><tr><td>OM-3125</td><td>05:35:21.83 -05:34:47.2</td><td>209.201195 -19.450099</td><td>288.C-5038(A)</td><td>XSHOO.2012-03-07T01:47:40.590</td><td>729631</td><td>OM-3125</td><td>150.0</td><td>SCIENCE</td><td>OBJECT</td><td>ECHELLE,SLIT,NODDING</td><td>SLITSPEC</td><td>NIR</td><td>--</td><td>V</td><td>SLOT</td><td>0.5x11</td><td>0.4x11</td><td>0.4x11</td><td>1.21 [0.50]</td></tr><tr><td>OM-3125</td><td>05:35:21.83 -05:34:47.2</td><td>209.201195 -19.450099</td><td>288.C-5038(A)</td><td>XSHOO.2012-03-07T01:47:37.329</td><td>729631</td><td>OM-3125</td><td>300.0</td><td>SCIENCE</td><td>OBJECT</td><td>ECHELLE,SLIT,NODDING</td><td>SLITSPEC</td><td>VIS</td><td>100k/1pt/hg</td><td>V</td><td>SLOT</td><td>0.5x11</td><td>0.4x11</td><td>0.4x11</td><td>1.20 [0.50]</td></tr><tr><td>LAMP,AFC</td><td>16:27:10.28 -24:19:12.7</td><td>353.249489 16.838301</td><td>089.C-0840(A)</td><td>XSHOO.2012-04-15T05:27:37.673</td><td>657274</td><td>SR21</td><td>0.5</td><td>CALIB</td><td>LAMP,AFC</td><td>ECHELLE</td><td>CALIB</td><td>VIS</td><td>400k/1pt/lg/AFC</td><td>V</td><td>PIN</td><td>5.0x11</td><td>5.0x11</td><td>5.0x11</td><td>1.00 [0.01]</td></tr></table>
+<table id="table4496498064"><thead><tr><th>Object</th><th>Target Ra Dec</th><th>Target l b</th><th>ProgId</th><th>DP.ID</th><th>OB.ID</th><th>OBS.TARG.NAME</th><th>EXPTIME</th><th>DPR.CATG</th><th>DPR.TYPE</th><th>DPR.TECH</th><th>INS MODE</th><th>SEQ.ARM</th><th>DET.READ.CLOCK</th><th>INS.FILT1.NAME</th><th>INS.OPTI2.NAME</th><th>INS.OPTI3.NAME</th><th>INS.OPTI4.NAME</th><th>INS.OPTI5.NAME</th><th>DIMM S-avg</th></tr></thead><tr><td>OBJECT</td><td>05:35:21.04 -05:31:21.2</td><td>209.145487 -19.427161</td><td>288.C-5038(A)</td><td>XSHOO.2012-02-26T02:41:35.429</td><td>729629</td><td>OM-1186</td><td>5.0</td><td>ACQUISITION</td><td>OBJECT</td><td>IMAGE</td><td>IMAG</td><td>--</td><td>acetecE2V57I_ENG.clk</td><td>V</td><td>MIR</td><td>5.0x11</td><td>5.0x11</td><td>5.0x11</td><td>1.08 [0.29]</td></tr><tr><td>LAMP,AFC</td><td>05:35:20.98 -05:31:21.5</td><td>209.145458 -19.427436</td><td>288.C-5038(A)</td><td>XSHOO.2012-02-26T02:38:24.054</td><td>729629</td><td>OM-1186</td><td>1.0</td><td>CALIB</td><td>LAMP,AFC</td><td>ECHELLE</td><td>CALIB</td><td>NIR</td><td>--</td><td>V</td><td>PIN</td><td>5.0x11</td><td>5.0x11</td><td>5.0x11</td><td>1.15 [0.43]</td></tr><tr><td>LAMP,AFC</td><td>05:35:20.98 -05:31:21.5</td><td>209.145458 -19.427436</td><td>288.C-5038(A)</td><td>XSHOO.2012-02-26T02:37:50.587</td><td>729629</td><td>OM-1186</td><td>10.0</td><td>CALIB</td><td>LAMP,AFC</td><td>ECHELLE</td><td>CALIB</td><td>UVB</td><td>400k/1pt/lg/AFC</td><td>V</td><td>SLOT</td><td>Pin_0.5</td><td>Pin_0.5</td><td>Pin_0.5</td><td>1.07 [0.27]</td></tr><tr><td>LAMP,AFC</td><td>05:35:20.98 -05:31:21.5</td><td>209.145458 -19.427436</td><td>288.C-5038(A)</td><td>XSHOO.2012-02-26T02:38:45.549</td><td>729629</td><td>OM-1186</td><td>1.0</td><td>CALIB</td><td>LAMP,AFC</td><td>ECHELLE</td><td>CALIB</td><td>NIR</td><td>--</td><td>V</td><td>PIN</td><td>5.0x11</td><td>5.0x11</td><td>5.0x11</td><td>1.15 [0.43]</td></tr><tr><td>OBJECT</td><td>05:35:21.05 -05:31:21.2</td><td>209.145500 -19.427159</td><td>288.C-5038(A)</td><td>XSHOO.2012-02-26T02:42:39.138</td><td>729629</td><td>OM-1186</td><td>5.0</td><td>ACQUISITION</td><td>OBJECT</td><td>IMAGE</td><td>IMAG</td><td>--</td><td>acetecE2V57I_ENG.clk</td><td>V</td><td>MIR</td><td>5.0x11</td><td>5.0x11</td><td>5.0x11</td><td>1.06 [0.25]</td></tr><tr><td>LAMP,AFC</td><td>05:35:20.98 -05:31:21.5</td><td>209.145458 -19.427436</td><td>288.C-5038(A)</td><td>XSHOO.2012-02-26T02:38:23.908</td><td>729629</td><td>OM-1186</td><td>0.5</td><td>CALIB</td><td>LAMP,AFC</td><td>ECHELLE</td><td>CALIB</td><td>VIS</td><td>400k/1pt/lg/AFC</td><td>V</td><td>PIN</td><td>5.0x11</td><td>5.0x11</td><td>5.0x11</td><td>1.15 [0.43]</td></tr><tr><td>OM-1186</td><td>05:35:21.19 -05:31:22.5</td><td>209.146118 -19.426783</td><td>288.C-5038(A)</td><td>XSHOO.2012-02-26T02:43:29.753</td><td>729629</td><td>OM-1186</td><td>300.0</td><td>SCIENCE</td><td>OBJECT</td><td>ECHELLE,SLIT,NODDING</td><td>SLITSPEC</td><td>UVB</td><td>100k/1pt/hg</td><td>V</td><td>SLOT</td><td>0.5x11</td><td>0.4x11</td><td>0.4x11</td><td>0.98 [0.01]</td></tr><tr><td>LAMP,AFC</td><td>05:35:20.98 -05:31:21.5</td><td>209.145458 -19.427436</td><td>288.C-5038(A)</td><td>XSHOO.2012-02-26T02:38:22.688</td><td>729629</td><td>OM-1186</td><td>10.0</td><td>CALIB</td><td>LAMP,AFC</td><td>ECHELLE</td><td>CALIB</td><td>UVB</td><td>400k/1pt/lg/AFC</td><td>V</td><td>PIN</td><td>5.0x11</td><td>5.0x11</td><td>5.0x11</td><td>1.15 [0.43]</td></tr><tr><td>LAMP,AFC</td><td>05:35:20.98 -05:31:21.5</td><td>209.145458 -19.427436</td><td>288.C-5038(A)</td><td>XSHOO.2012-02-26T02:37:51.806</td><td>729629</td><td>OM-1186</td><td>0.5</td><td>CALIB</td><td>LAMP,AFC</td><td>ECHELLE</td><td>CALIB</td><td>VIS</td><td>400k/1pt/lg/AFC</td><td>V</td><td>SLOT</td><td>Pin_0.5</td><td>Pin_0.5</td><td>Pin_0.5</td><td>1.07 [0.27]</td></tr><tr><td>OM-1186</td><td>05:35:21.19 -05:31:22.5</td><td>209.146118 -19.426783</td><td>288.C-5038(A)</td><td>XSHOO.2012-02-26T02:43:38.418</td><td>729629</td><td>OM-1186</td><td>150.0</td><td>SCIENCE</td><td>OBJECT</td><td>ECHELLE,SLIT,NODDING</td><td>SLITSPEC</td><td>NIR</td><td>--</td><td>V</td><td>SLOT</td><td>0.5x11</td><td>0.4x11</td><td>0.4x11</td><td>0.98 [0.01]</td></tr><tr><td>OBJECT</td><td>05:35:21.05 -05:31:21.2</td><td>209.145500 -19.427159</td><td>288.C-5038(A)</td><td>XSHOO.2012-02-26T02:42:08.839</td><td>729629</td><td>OM-1186</td><td>5.0</td><td>ACQUISITION</td><td>OBJECT</td><td>IMAGE</td><td>IMAG</td><td>--</td><td>acetecE2V57I_ENG.clk</td><td>V</td><td>MIR</td><td>5.0x11</td><td>5.0x11</td><td>5.0x11</td><td>1.08 [0.29]</td></tr><tr><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td></tr><tr><td>LAMP,AFC</td><td>05:35:21.69 -05:34:46.9</td><td>209.200829 -19.450582</td><td>288.C-5038(A)</td><td>XSHOO.2012-03-07T01:19:29.828</td><td>729631</td><td>OM-3125</td><td>1.0</td><td>CALIB</td><td>LAMP,AFC</td><td>ECHELLE</td><td>CALIB</td><td>NIR</td><td>--</td><td>U</td><td>PIN</td><td>5.0x11</td><td>5.0x11</td><td>5.0x11</td><td>1.21 [0.51]</td></tr><tr><td>OM-3125</td><td>05:35:21.83 -05:34:47.2</td><td>209.201195 -19.450099</td><td>288.C-5038(A)</td><td>XSHOO.2012-03-07T01:24:06.503</td><td>729631</td><td>OM-3125</td><td>300.0</td><td>SCIENCE</td><td>OBJECT</td><td>ECHELLE,SLIT,NODDING</td><td>SLITSPEC</td><td>VIS</td><td>100k/1pt/hg</td><td>V</td><td>SLOT</td><td>0.5x11</td><td>0.4x11</td><td>0.4x11</td><td>1.07 [0.29]</td></tr><tr><td>LAMP,AFC</td><td>05:35:21.69 -05:34:46.9</td><td>209.200829 -19.450582</td><td>288.C-5038(A)</td><td>XSHOO.2012-03-07T01:19:29.680</td><td>729631</td><td>OM-3125</td><td>0.5</td><td>CALIB</td><td>LAMP,AFC</td><td>ECHELLE</td><td>CALIB</td><td>VIS</td><td>400k/1pt/lg/AFC</td><td>U</td><td>PIN</td><td>5.0x11</td><td>5.0x11</td><td>5.0x11</td><td>1.21 [0.51]</td></tr><tr><td>OM-3125</td><td>05:35:21.56 -05:34:44.3</td><td>209.199891 -19.450737</td><td>288.C-5038(A)</td><td>XSHOO.2012-03-07T01:31:58.691</td><td>729631</td><td>OM-3125</td><td>300.0</td><td>SCIENCE</td><td>OBJECT</td><td>ECHELLE,SLIT,NODDING</td><td>SLITSPEC</td><td>VIS</td><td>100k/1pt/hg</td><td>V</td><td>SLOT</td><td>0.5x11</td><td>0.4x11</td><td>0.4x11</td><td>1.31 [0.64]</td></tr><tr><td>OM-3125</td><td>05:35:21.83 -05:34:47.2</td><td>209.201195 -19.450099</td><td>288.C-5038(A)</td><td>XSHOO.2012-03-07T01:24:09.816</td><td>729631</td><td>OM-3125</td><td>150.0</td><td>SCIENCE</td><td>OBJECT</td><td>ECHELLE,SLIT,NODDING</td><td>SLITSPEC</td><td>NIR</td><td>--</td><td>V</td><td>SLOT</td><td>0.5x11</td><td>0.4x11</td><td>0.4x11</td><td>1.10 [0.34]</td></tr><tr><td>OBJECT</td><td>05:35:21.69 -05:34:45.7</td><td>209.200538 -19.450416</td><td>288.C-5038(A)</td><td>XSHOO.2012-03-07T01:23:19.679</td><td>729631</td><td>OM-3125</td><td>3.0</td><td>ACQUISITION</td><td>OBJECT</td><td>IMAGE</td><td>IMAG</td><td>--</td><td>acetecE2V57I_ENG.clk</td><td>V</td><td>MIR</td><td>5.0x11</td><td>5.0x11</td><td>5.0x11</td><td>1.17 [0.45]</td></tr><tr><td>OM-3125</td><td>05:35:21.83 -05:34:47.2</td><td>209.201195 -19.450099</td><td>288.C-5038(A)</td><td>XSHOO.2012-03-07T01:47:32.118</td><td>729631</td><td>OM-3125</td><td>300.0</td><td>SCIENCE</td><td>OBJECT</td><td>ECHELLE,SLIT,NODDING</td><td>SLITSPEC</td><td>UVB</td><td>100k/1pt/hg</td><td>V</td><td>SLOT</td><td>0.5x11</td><td>0.4x11</td><td>0.4x11</td><td>1.20 [0.50]</td></tr><tr><td>OM-3125</td><td>05:35:21.56 -05:34:44.3</td><td>209.199891 -19.450737</td><td>288.C-5038(A)</td><td>XSHOO.2012-03-07T01:39:45.039</td><td>729631</td><td>OM-3125</td><td>300.0</td><td>SCIENCE</td><td>OBJECT</td><td>ECHELLE,SLIT,NODDING</td><td>SLITSPEC</td><td>VIS</td><td>100k/1pt/hg</td><td>V</td><td>SLOT</td><td>0.5x11</td><td>0.4x11</td><td>0.4x11</td><td>1.25 [0.58]</td></tr><tr><td>OM-3125</td><td>05:35:21.83 -05:34:47.2</td><td>209.201195 -19.450099</td><td>288.C-5038(A)</td><td>XSHOO.2012-03-07T01:47:40.590</td><td>729631</td><td>OM-3125</td><td>150.0</td><td>SCIENCE</td><td>OBJECT</td><td>ECHELLE,SLIT,NODDING</td><td>SLITSPEC</td><td>NIR</td><td>--</td><td>V</td><td>SLOT</td><td>0.5x11</td><td>0.4x11</td><td>0.4x11</td><td>1.21 [0.50]</td></tr><tr><td>OM-3125</td><td>05:35:21.83 -05:34:47.2</td><td>209.201195 -19.450099</td><td>288.C-5038(A)</td><td>XSHOO.2012-03-07T01:47:37.329</td><td>729631</td><td>OM-3125</td><td>300.0</td><td>SCIENCE</td><td>OBJECT</td><td>ECHELLE,SLIT,NODDING</td><td>SLITSPEC</td><td>VIS</td><td>100k/1pt/hg</td><td>V</td><td>SLOT</td><td>0.5x11</td><td>0.4x11</td><td>0.4x11</td><td>1.20 [0.50]</td></tr><tr><td>LAMP,AFC</td><td>16:27:10.28 -24:19:12.7</td><td>353.249489 16.838301</td><td>089.C-0840(A)</td><td>XSHOO.2012-04-15T05:27:37.673</td><td>657274</td><td>SR21</td><td>0.5</td><td>CALIB</td><td>LAMP,AFC</td><td>ECHELLE</td><td>CALIB</td><td>VIS</td><td>400k/1pt/lg/AFC</td><td>V</td><td>PIN</td><td>5.0x11</td><td>5.0x11</td><td>5.0x11</td><td>1.00 [0.01]</td></tr></table>
 </div>
 
 </div>
@@ -2192,7 +2289,7 @@ In&nbsp;[10]:
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[11]:
+In&nbsp;[14]:
 </div>
 <div class="inner_cell">
     <div class="input_area">
@@ -2208,7 +2305,7 @@ In&nbsp;[11]:
 
 
 <div class="output_area"><div class="prompt output_prompt">
-    Out[11]:</div>
+    Out[14]:</div>
 
 
 <div class="output_text output_subarea output_pyout">
@@ -2254,7 +2351,7 @@ In&nbsp;[11]:
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[12]:
+In&nbsp;[15]:
 </div>
 <div class="inner_cell">
     <div class="input_area">
@@ -2270,7 +2367,7 @@ In&nbsp;[12]:
 
 
 <div class="output_area"><div class="prompt output_prompt">
-    Out[12]:</div>
+    Out[15]:</div>
 
 
 <div class="output_text output_subarea output_pyout">
@@ -2297,7 +2394,7 @@ In&nbsp;[12]:
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[13]:
+In&nbsp;[16]:
 </div>
 <div class="inner_cell">
     <div class="input_area">
@@ -2313,7 +2410,7 @@ In&nbsp;[13]:
 
 
 <div class="output_area"><div class="prompt output_prompt">
-    Out[13]:</div>
+    Out[16]:</div>
 
 
 <div class="output_text output_subarea output_pyout">
@@ -2372,7 +2469,7 @@ masked_array(data = [&apos;XSHOO.2012-02-26T02:41:35.429&apos; &apos;XSHOO.2012-
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[14]:
+In&nbsp;[17]:
 </div>
 <div class="inner_cell">
     <div class="input_area">
@@ -2398,7 +2495,7 @@ Authentication successful!
 </div>
 
 <div class="output_area"><div class="prompt output_prompt">
-    Out[14]:</div>
+    Out[17]:</div>
 
 
 <div class="output_text output_subarea output_pyout">
@@ -2416,7 +2513,7 @@ True
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[15]:
+In&nbsp;[18]:
 </div>
 <div class="inner_cell">
     <div class="input_area">
@@ -2431,11 +2528,11 @@ In&nbsp;[15]:
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[16]:
+In&nbsp;[19]:
 </div>
 <div class="inner_cell">
     <div class="input_area">
-<div class="highlight"><pre><span class="n">Eso</span><span class="o">.</span><span class="n">data_retrieval</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="s">&#39;DP.ID&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">:</span><span class="mi">1</span><span class="p">])</span>
+<div class="highlight"><pre><span class="n">Eso</span><span class="o">.</span><span class="n">data_retrieval</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="s">&#39;DP.ID&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">:</span><span class="mi">1</span><span class="p">])</span>
 </pre></div>
 
 </div>
@@ -2449,9 +2546,7 @@ In&nbsp;[16]:
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>
-Staging request...
-Downloading files...
-Downloading X.xml...
+Found XSHOO.2012-02-26T02:41:35.429.fits...
 Done!
 
 </pre>
@@ -2459,12 +2554,12 @@ Done!
 </div>
 
 <div class="output_area"><div class="prompt output_prompt">
-    Out[16]:</div>
+    Out[19]:</div>
 
 
 <div class="output_text output_subarea output_pyout">
 <pre>
-[u&apos;/Users/adam/.astropy/cache/astroquery/Eso/X&apos;]
+[u&apos;/Users/adam/.astropy/cache/astroquery/Eso/XSHOO.2012-02-26T02:41:35.429.fits&apos;]
 </pre>
 </div>
 
@@ -2487,7 +2582,7 @@ Done!
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[17]:
+In&nbsp;[20]:
 </div>
 <div class="inner_cell">
     <div class="input_area">
@@ -2502,7 +2597,7 @@ In&nbsp;[17]:
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[18]:
+In&nbsp;[21]:
 </div>
 <div class="inner_cell">
     <div class="input_area">
@@ -2519,10 +2614,10 @@ In&nbsp;[18]:
 
 
 <div class="output_area"><div class="prompt output_prompt">
-    Out[18]:</div>
+    Out[21]:</div>
 
 <div class="output_html rendered_html output_subarea output_pyout">
-<table id="table4463398416"><thead><tr><th>Observed</th><th>Ritz</th><th>Rel.</th><th>Aki</th><th>fik</th><th>Acc.</th><th>Ei           Ek</th><th>Lower level</th><th>Upper level</th><th>Type</th><th>TP</th><th>Line</th></tr></thead><tr><td>--</td><td>4102.85985516</td><td>--</td><td>4287700.0</td><td>0.021641</td><td>AAA</td><td>10.19880570432       -    T8637 |</td><td>--</td><td>--</td><td>--</td><td>--</td><td>--</td></tr><tr><td>--</td><td>4102.86191086</td><td>--</td><td>245010.0</td><td>0.00061831</td><td>AAA</td><td>10.19880570432       -     13.22070104727</td><td>2p     | 2P*  | 1/2</td><td>6s     | 2S   | 1/2</td><td>--</td><td>T8637</td><td>--</td></tr><tr><td>--</td><td>4102.8632</td><td>--</td><td>--</td><td>--</td><td>--</td><td>--</td><td>|      |</td><td>|      |</td><td>--</td><td>--</td><td>c57</td></tr><tr><td>4102.86503481</td><td>4102.86503481</td><td>--</td><td>--</td><td>--</td><td>--</td><td>10.19881007922431    -     13.22070312129</td><td>2s     | 2S   | 1/2</td><td>6d     | 2D   | 5/2</td><td>E2</td><td>--</td><td>L11759</td></tr><tr><td>--</td><td>4102.86579134</td><td>--</td><td>2858300.0</td><td>0.014427</td><td>AAA</td><td>10.19881007922431    -    T8637 |</td><td>--</td><td>--</td><td>--</td><td>--</td><td>--</td></tr><tr><td>4102.86785074</td><td>4102.86785074</td><td>--</td><td>--</td><td>--</td><td>--</td><td>10.19881007922431    -     13.22070104727</td><td>2s     | 2S   | 1/2</td><td>6s     | 2S   | 1/2</td><td>M1</td><td>--</td><td>L11759</td></tr><tr><td>--</td><td>4102.86807252</td><td>--</td><td>2858400.0</td><td>0.0072136</td><td>AAA</td><td>10.19881007922431    -    T8637 |</td><td>--</td><td>--</td><td>--</td><td>--</td><td>--</td></tr><tr><td>4102.892</td><td>4102.8991</td><td>70000</td><td>973200.0</td><td>0.022105</td><td>AAA</td><td>10.1988353           -     13.22070331</td><td>2      |      |</td><td>6      |      |</td><td>--</td><td>T8637</td><td>L7436c29</td></tr><tr><td>--</td><td>4102.8922</td><td>--</td><td>--</td><td>--</td><td>--</td><td>--</td><td>|      |</td><td>|      |</td><td>--</td><td>--</td><td>c58</td></tr><tr><td>--</td><td>4102.92068748</td><td>--</td><td>5145000.0</td><td>0.019477</td><td>AAA</td><td>10.19885106866       -     13.22070312129</td><td>2p     | 2P*  | 3/2</td><td>6d     | 2D   | 5/2</td><td>--</td><td>T8637</td><td>--</td></tr><tr><td>--</td><td>4102.9208</td><td>--</td><td>--</td><td>--</td><td>--</td><td>--</td><td>|      |</td><td>|      |</td><td>--</td><td>--</td><td>c59</td></tr><tr><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td></tr><tr><td>--</td><td>6564.564672</td><td>--</td><td>2104600.0</td><td>0.013597</td><td>AAA</td><td>10.19880570432       -     12.0874944326</td><td>2p     | 2P*  | 1/2</td><td>3s     | 2S   | 1/2</td><td>--</td><td>T8637</td><td>--</td></tr><tr><td>--</td><td>6564.579878</td><td>--</td><td>--</td><td>--</td><td>--</td><td>10.19881007922431    -     12.0874944326</td><td>2s     | 2S   | 1/2</td><td>3s     | 2S   | 1/2</td><td>M1</td><td>--</td><td>--</td></tr><tr><td>--</td><td>6564.583</td><td>--</td><td>--</td><td>--</td><td>--</td><td>--</td><td>|      |</td><td>|      |</td><td>--</td><td>--</td><td>c66</td></tr><tr><td>6564.584404</td><td>6564.584403</td><td>--</td><td>22449000.0</td><td>0.14503</td><td>AAA</td><td>10.19881007922431    -     12.0874931306</td><td>2s     | 2S   | 1/2</td><td>3p     | 2P*  | 1/2</td><td>--</td><td>T8637</td><td>L6891c38</td></tr><tr><td>6564.6</td><td>6564.632</td><td>500000</td><td>44101000.0</td><td>0.64108</td><td>AAA</td><td>10.1988353           -     12.0875046</td><td>2      |      |</td><td>3      |      |</td><td>--</td><td>T8637</td><td>L7400c29</td></tr><tr><td>--</td><td>6564.608</td><td>--</td><td>--</td><td>--</td><td>--</td><td>--</td><td>|      |</td><td>|      |</td><td>--</td><td>--</td><td>c69</td></tr><tr><td>6564.66464</td><td>6564.66466</td><td>--</td><td>64651000.0</td><td>0.62654</td><td>AAA</td><td>10.19885106866       -     12.0875110297</td><td>2p     | 2P*  | 3/2</td><td>3d     | 2D   | 5/2</td><td>--</td><td>T8637</td><td>L2752</td></tr><tr><td>--</td><td>6564.6662</td><td>--</td><td>--</td><td>--</td><td>--</td><td>--</td><td>|      |</td><td>|      |</td><td>--</td><td>--</td><td>c71</td></tr><tr><td>--</td><td>6564.667</td><td>--</td><td>--</td><td>--</td><td>--</td><td>--</td><td>|      |</td><td>|      |</td><td>--</td><td>--</td><td>c70</td></tr><tr><td>--</td><td>6564.680232</td><td>--</td><td>10775000.0</td><td>0.069616</td><td>AAA</td><td>10.19885106866       -     12.0875065498</td><td>2p     | 2P*  | 3/2</td><td>3d     | 2D   | 3/2</td><td>--</td><td>T8637</td><td>--</td></tr><tr><td>--</td><td>6564.722349</td><td>--</td><td>4209700.0</td><td>0.013599</td><td>AAA</td><td>10.19885106866       -     12.0874944326</td><td>2p     | 2P*  | 3/2</td><td>3s     | 2S   | 1/2</td><td>--</td><td>T8637</td><td>--</td></tr></table>
+<table id="table4448783184"><thead><tr><th>Observed</th><th>Ritz</th><th>Rel.</th><th>Aki</th><th>fik</th><th>Acc.</th><th>Ei           Ek</th><th>Lower level</th><th>Upper level</th><th>Type</th><th>TP</th><th>Line</th></tr></thead><tr><td>--</td><td>4102.85985516</td><td>--</td><td>4287700.0</td><td>0.021641</td><td>AAA</td><td>10.19880570432       -    T8637 |</td><td>--</td><td>--</td><td>--</td><td>--</td><td>--</td></tr><tr><td>--</td><td>4102.86191086</td><td>--</td><td>245010.0</td><td>0.00061831</td><td>AAA</td><td>10.19880570432       -     13.22070104727</td><td>2p     | 2P*  | 1/2</td><td>6s     | 2S   | 1/2</td><td>--</td><td>T8637</td><td>--</td></tr><tr><td>--</td><td>4102.8632</td><td>--</td><td>--</td><td>--</td><td>--</td><td>--</td><td>|      |</td><td>|      |</td><td>--</td><td>--</td><td>c57</td></tr><tr><td>4102.86503481</td><td>4102.86503481</td><td>--</td><td>--</td><td>--</td><td>--</td><td>10.19881007922431    -     13.22070312129</td><td>2s     | 2S   | 1/2</td><td>6d     | 2D   | 5/2</td><td>E2</td><td>--</td><td>L11759</td></tr><tr><td>--</td><td>4102.86579134</td><td>--</td><td>2858300.0</td><td>0.014427</td><td>AAA</td><td>10.19881007922431    -    T8637 |</td><td>--</td><td>--</td><td>--</td><td>--</td><td>--</td></tr><tr><td>4102.86785074</td><td>4102.86785074</td><td>--</td><td>--</td><td>--</td><td>--</td><td>10.19881007922431    -     13.22070104727</td><td>2s     | 2S   | 1/2</td><td>6s     | 2S   | 1/2</td><td>M1</td><td>--</td><td>L11759</td></tr><tr><td>--</td><td>4102.86807252</td><td>--</td><td>2858400.0</td><td>0.0072136</td><td>AAA</td><td>10.19881007922431    -    T8637 |</td><td>--</td><td>--</td><td>--</td><td>--</td><td>--</td></tr><tr><td>4102.892</td><td>4102.8991</td><td>70000</td><td>973200.0</td><td>0.022105</td><td>AAA</td><td>10.1988353           -     13.22070331</td><td>2      |      |</td><td>6      |      |</td><td>--</td><td>T8637</td><td>L7436c29</td></tr><tr><td>--</td><td>4102.8922</td><td>--</td><td>--</td><td>--</td><td>--</td><td>--</td><td>|      |</td><td>|      |</td><td>--</td><td>--</td><td>c58</td></tr><tr><td>--</td><td>4102.92068748</td><td>--</td><td>5145000.0</td><td>0.019477</td><td>AAA</td><td>10.19885106866       -     13.22070312129</td><td>2p     | 2P*  | 3/2</td><td>6d     | 2D   | 5/2</td><td>--</td><td>T8637</td><td>--</td></tr><tr><td>--</td><td>4102.9208</td><td>--</td><td>--</td><td>--</td><td>--</td><td>--</td><td>|      |</td><td>|      |</td><td>--</td><td>--</td><td>c59</td></tr><tr><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td></tr><tr><td>--</td><td>6564.564672</td><td>--</td><td>2104600.0</td><td>0.013597</td><td>AAA</td><td>10.19880570432       -     12.0874944326</td><td>2p     | 2P*  | 1/2</td><td>3s     | 2S   | 1/2</td><td>--</td><td>T8637</td><td>--</td></tr><tr><td>--</td><td>6564.579878</td><td>--</td><td>--</td><td>--</td><td>--</td><td>10.19881007922431    -     12.0874944326</td><td>2s     | 2S   | 1/2</td><td>3s     | 2S   | 1/2</td><td>M1</td><td>--</td><td>--</td></tr><tr><td>--</td><td>6564.583</td><td>--</td><td>--</td><td>--</td><td>--</td><td>--</td><td>|      |</td><td>|      |</td><td>--</td><td>--</td><td>c66</td></tr><tr><td>6564.584404</td><td>6564.584403</td><td>--</td><td>22449000.0</td><td>0.14503</td><td>AAA</td><td>10.19881007922431    -     12.0874931306</td><td>2s     | 2S   | 1/2</td><td>3p     | 2P*  | 1/2</td><td>--</td><td>T8637</td><td>L6891c38</td></tr><tr><td>6564.6</td><td>6564.632</td><td>500000</td><td>44101000.0</td><td>0.64108</td><td>AAA</td><td>10.1988353           -     12.0875046</td><td>2      |      |</td><td>3      |      |</td><td>--</td><td>T8637</td><td>L7400c29</td></tr><tr><td>--</td><td>6564.608</td><td>--</td><td>--</td><td>--</td><td>--</td><td>--</td><td>|      |</td><td>|      |</td><td>--</td><td>--</td><td>c69</td></tr><tr><td>6564.66464</td><td>6564.66466</td><td>--</td><td>64651000.0</td><td>0.62654</td><td>AAA</td><td>10.19885106866       -     12.0875110297</td><td>2p     | 2P*  | 3/2</td><td>3d     | 2D   | 5/2</td><td>--</td><td>T8637</td><td>L2752</td></tr><tr><td>--</td><td>6564.6662</td><td>--</td><td>--</td><td>--</td><td>--</td><td>--</td><td>|      |</td><td>|      |</td><td>--</td><td>--</td><td>c71</td></tr><tr><td>--</td><td>6564.667</td><td>--</td><td>--</td><td>--</td><td>--</td><td>--</td><td>|      |</td><td>|      |</td><td>--</td><td>--</td><td>c70</td></tr><tr><td>--</td><td>6564.680232</td><td>--</td><td>10775000.0</td><td>0.069616</td><td>AAA</td><td>10.19885106866       -     12.0875065498</td><td>2p     | 2P*  | 3/2</td><td>3d     | 2D   | 3/2</td><td>--</td><td>T8637</td><td>--</td></tr><tr><td>--</td><td>6564.722349</td><td>--</td><td>4209700.0</td><td>0.013599</td><td>AAA</td><td>10.19885106866       -     12.0874944326</td><td>2p     | 2P*  | 3/2</td><td>3s     | 2S   | 1/2</td><td>--</td><td>T8637</td><td>--</td></tr></table>
 </div>
 
 </div>
@@ -2534,7 +2629,7 @@ In&nbsp;[18]:
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[19]:
+In&nbsp;[22]:
 </div>
 <div class="inner_cell">
     <div class="input_area">
@@ -2558,7 +2653,7 @@ In&nbsp;[19]:
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[20]:
+In&nbsp;[23]:
 </div>
 <div class="inner_cell">
     <div class="input_area">
@@ -2575,7 +2670,7 @@ In&nbsp;[20]:
 
 
 <div class="output_area"><div class="prompt output_prompt">
-    Out[20]:</div>
+    Out[23]:</div>
 
 
 <div class="output_text output_subarea output_pyout">
@@ -2596,7 +2691,7 @@ In&nbsp;[20]:
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[21]:
+In&nbsp;[24]:
 </div>
 <div class="inner_cell">
     <div class="input_area">
@@ -2615,10 +2710,10 @@ In&nbsp;[21]:
 
 
 <div class="output_area"><div class="prompt output_prompt">
-    Out[21]:</div>
+    Out[24]:</div>
 
 <div class="output_html rendered_html output_subarea output_pyout">
-<table id="table4463695760"><thead><tr><th>Species</th><th>Chemical Name</th><th>Freq-GHz</th><th>Freq Err</th><th>Meas Freq-GHz</th><th>Meas Freq Err</th><th>Resolved QNs</th><th>CDMS/JPL Intensity</th><th>S&lt;sub&gt;ij&lt;/sub&gt;</th><th>Log&lt;sub&gt;10&lt;/sub&gt; (A&lt;sub&gt;ij&lt;/sub&gt;)</th><th>Lovas/AST Intensity</th><th>E_L (cm^-1)</th><th>E_L (K)</th><th>E_U (cm^-1)</th><th>E_U (K)</th><th>Linelist</th></tr></thead><tr><td>COv=0</td><td>Carbon Monoxide</td><td>230.538</td><td>0</td><td>230.538</td><td>1e-06</td><td>2-1</td><td>0.0</td><td>2.0</td><td>-6.16011</td><td>70.0</td><td>3.845</td><td>5.53207</td><td>11.53492</td><td>16.59608</td><td>SLAIM</td></tr></table>
+<table id="table4497453712"><thead><tr><th>Species</th><th>Chemical Name</th><th>Freq-GHz</th><th>Freq Err</th><th>Meas Freq-GHz</th><th>Meas Freq Err</th><th>Resolved QNs</th><th>CDMS/JPL Intensity</th><th>S&lt;sub&gt;ij&lt;/sub&gt;</th><th>Log&lt;sub&gt;10&lt;/sub&gt; (A&lt;sub&gt;ij&lt;/sub&gt;)</th><th>Lovas/AST Intensity</th><th>E_L (cm^-1)</th><th>E_L (K)</th><th>E_U (cm^-1)</th><th>E_U (K)</th><th>Linelist</th></tr></thead><tr><td>COv=0</td><td>Carbon Monoxide</td><td>230.538</td><td>0</td><td>230.538</td><td>1e-06</td><td>2-1</td><td>0.0</td><td>2.0</td><td>-6.16011</td><td>70.0</td><td>3.845</td><td>5.53207</td><td>11.53492</td><td>16.59608</td><td>SLAIM</td></tr></table>
 </div>
 
 </div>
@@ -2641,7 +2736,7 @@ In&nbsp;[21]:
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[22]:
+In&nbsp;[25]:
 </div>
 <div class="inner_cell">
     <div class="input_area">
@@ -2656,7 +2751,7 @@ In&nbsp;[22]:
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[23]:
+In&nbsp;[26]:
 </div>
 <div class="inner_cell">
     <div class="input_area">
@@ -2674,12 +2769,12 @@ In&nbsp;[23]:
 
 
 <div class="output_area"><div class="prompt output_prompt">
-    Out[23]:</div>
+    Out[26]:</div>
 
 
 <div class="output_text output_subarea output_pyout">
 <pre>
-&lt;astroquery.vizier.core.VizierClass at 0x10c099210&gt;
+&lt;astroquery.vizier.core.VizierClass at 0x10c12e250&gt;
 </pre>
 </div>
 
@@ -2703,7 +2798,7 @@ In&nbsp;[23]:
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[24]:
+In&nbsp;[27]:
 </div>
 <div class="inner_cell">
     <div class="input_area">
@@ -2730,10 +2825,10 @@ In&nbsp;[24]:
 </div>
 
 <div class="output_area"><div class="prompt output_prompt">
-    Out[24]:</div>
+    Out[27]:</div>
 
 <div class="output_html rendered_html output_subarea output_pyout">
-<table id="table4496976016"><thead><tr><th>_RAJ2000</th><th>_DEJ2000</th><th>Cl</th><th>nR</th><th>Name</th><th>n_RAJ2000</th><th>RAJ2000</th><th>DEJ2000</th><th>l_z</th><th>z</th><th>Sp</th><th>n_Vmag</th><th>Vmag</th><th>B-V</th><th>r_z</th></tr></thead><thead><tr><th>deg</th><th>deg</th><th></th><th></th><th></th><th></th><th>&quot;h:m:s&quot;</th><th>&quot;d:m:s&quot;</th><th></th><th></th><th></th><th></th><th>mag</th><th>mag</th><th></th></tr></thead><tr><td>10.6846</td><td>41.2694</td><td>Q</td><td></td><td>M 31</td><td>O</td><td>00 42 44.3</td><td>+41 16 10</td><td></td><td>0.000</td><td>S2</td><td></td><td>10.57</td><td>1.08</td><td>1936</td></tr><tr><td>60.2779</td><td>-16.1108</td><td>Q</td><td></td><td>NPM1G-16.0168</td><td>O</td><td>04 01 06.7</td><td>-16 06 39</td><td></td><td>0.031</td><td></td><td>R</td><td>10.16</td><td>nan</td><td>988</td></tr><tr><td>27.2387</td><td>5.9067</td><td>A</td><td>*</td><td>NGC  676</td><td></td><td>01 48 57.3</td><td>+05 54 24</td><td></td><td>0.005</td><td>S2</td><td></td><td>10.50</td><td>nan</td><td>1034</td></tr><tr><td>40.6696</td><td>-0.0131</td><td>A</td><td></td><td>NGC 1068</td><td>O</td><td>02 42 40.7</td><td>-00 00 47</td><td></td><td>0.003</td><td>S1h</td><td></td><td>10.83</td><td>0.87</td><td>58</td></tr><tr><td>139.7596</td><td>26.2697</td><td>A</td><td></td><td>NGC 2824</td><td>O</td><td>09 19 02.3</td><td>+26 16 11</td><td></td><td>0.008</td><td>S?</td><td></td><td>10.88</td><td>nan</td><td>2528</td></tr><tr><td>147.5921</td><td>72.2792</td><td>A</td><td></td><td>NGC 2985</td><td>O</td><td>09 50 22.1</td><td>+72 16 45</td><td></td><td>0.004</td><td>S1.9</td><td></td><td>10.61</td><td>0.76</td><td>1033</td></tr><tr><td>173.1442</td><td>53.0678</td><td>A</td><td></td><td>NGC 3718</td><td>O</td><td>11 32 34.6</td><td>+53 04 04</td><td></td><td>0.003</td><td>S3b</td><td></td><td>10.61</td><td>0.74</td><td>1033</td></tr><tr><td>184.9608</td><td>29.6139</td><td>A</td><td></td><td>UGC  7377</td><td>O</td><td>12 19 50.6</td><td>+29 36 50</td><td></td><td>0.003</td><td>S3</td><td></td><td>10.47</td><td>0.99</td><td>2500</td></tr><tr><td>185.0287</td><td>29.2808</td><td>A</td><td></td><td>NGC 4278</td><td>O</td><td>12 20 06.9</td><td>+29 16 51</td><td></td><td>0.002</td><td>S3b</td><td></td><td>10.87</td><td>0.98</td><td>1033</td></tr><tr><td>186.4537</td><td>33.5467</td><td>A</td><td></td><td>NGC 4395</td><td>O</td><td>12 25 48.9</td><td>+33 32 48</td><td></td><td>0.001</td><td>S1.8</td><td></td><td>10.27</td><td>0.53</td><td>1033</td></tr><tr><td>192.7196</td><td>41.1194</td><td>A</td><td></td><td>NGC 4736</td><td>O</td><td>12 50 52.7</td><td>+41 07 10</td><td></td><td>0.001</td><td>S</td><td></td><td>10.85</td><td>0.85</td><td>1032</td></tr><tr><td>208.3612</td><td>40.2831</td><td>A</td><td></td><td>NGC 5353</td><td>O</td><td>13 53 26.7</td><td>+40 16 59</td><td></td><td>0.008</td><td>S?</td><td>R</td><td>10.91</td><td>nan</td><td>368</td></tr></table>
+<table id="table4497320208"><thead><tr><th>_RAJ2000</th><th>_DEJ2000</th><th>Cl</th><th>nR</th><th>Name</th><th>n_RAJ2000</th><th>RAJ2000</th><th>DEJ2000</th><th>l_z</th><th>z</th><th>Sp</th><th>n_Vmag</th><th>Vmag</th><th>B-V</th><th>r_z</th></tr></thead><thead><tr><th>deg</th><th>deg</th><th></th><th></th><th></th><th></th><th>&quot;h:m:s&quot;</th><th>&quot;d:m:s&quot;</th><th></th><th></th><th></th><th></th><th>mag</th><th>mag</th><th></th></tr></thead><tr><td>10.6846</td><td>41.2694</td><td>Q</td><td></td><td>M 31</td><td>O</td><td>00 42 44.3</td><td>+41 16 10</td><td></td><td>0.000</td><td>S2</td><td></td><td>10.57</td><td>1.08</td><td>1936</td></tr><tr><td>60.2779</td><td>-16.1108</td><td>Q</td><td></td><td>NPM1G-16.0168</td><td>O</td><td>04 01 06.7</td><td>-16 06 39</td><td></td><td>0.031</td><td></td><td>R</td><td>10.16</td><td>nan</td><td>988</td></tr><tr><td>27.2387</td><td>5.9067</td><td>A</td><td>*</td><td>NGC  676</td><td></td><td>01 48 57.3</td><td>+05 54 24</td><td></td><td>0.005</td><td>S2</td><td></td><td>10.50</td><td>nan</td><td>1034</td></tr><tr><td>40.6696</td><td>-0.0131</td><td>A</td><td></td><td>NGC 1068</td><td>O</td><td>02 42 40.7</td><td>-00 00 47</td><td></td><td>0.003</td><td>S1h</td><td></td><td>10.83</td><td>0.87</td><td>58</td></tr><tr><td>139.7596</td><td>26.2697</td><td>A</td><td></td><td>NGC 2824</td><td>O</td><td>09 19 02.3</td><td>+26 16 11</td><td></td><td>0.008</td><td>S?</td><td></td><td>10.88</td><td>nan</td><td>2528</td></tr><tr><td>147.5921</td><td>72.2792</td><td>A</td><td></td><td>NGC 2985</td><td>O</td><td>09 50 22.1</td><td>+72 16 45</td><td></td><td>0.004</td><td>S1.9</td><td></td><td>10.61</td><td>0.76</td><td>1033</td></tr><tr><td>173.1442</td><td>53.0678</td><td>A</td><td></td><td>NGC 3718</td><td>O</td><td>11 32 34.6</td><td>+53 04 04</td><td></td><td>0.003</td><td>S3b</td><td></td><td>10.61</td><td>0.74</td><td>1033</td></tr><tr><td>184.9608</td><td>29.6139</td><td>A</td><td></td><td>UGC  7377</td><td>O</td><td>12 19 50.6</td><td>+29 36 50</td><td></td><td>0.003</td><td>S3</td><td></td><td>10.47</td><td>0.99</td><td>2500</td></tr><tr><td>185.0287</td><td>29.2808</td><td>A</td><td></td><td>NGC 4278</td><td>O</td><td>12 20 06.9</td><td>+29 16 51</td><td></td><td>0.002</td><td>S3b</td><td></td><td>10.87</td><td>0.98</td><td>1033</td></tr><tr><td>186.4537</td><td>33.5467</td><td>A</td><td></td><td>NGC 4395</td><td>O</td><td>12 25 48.9</td><td>+33 32 48</td><td></td><td>0.001</td><td>S1.8</td><td></td><td>10.27</td><td>0.53</td><td>1033</td></tr><tr><td>192.7196</td><td>41.1194</td><td>A</td><td></td><td>NGC 4736</td><td>O</td><td>12 50 52.7</td><td>+41 07 10</td><td></td><td>0.001</td><td>S</td><td></td><td>10.85</td><td>0.85</td><td>1032</td></tr><tr><td>208.3612</td><td>40.2831</td><td>A</td><td></td><td>NGC 5353</td><td>O</td><td>13 53 26.7</td><td>+40 16 59</td><td></td><td>0.008</td><td>S?</td><td>R</td><td>10.91</td><td>nan</td><td>368</td></tr></table>
 </div>
 
 </div>
@@ -2754,7 +2849,7 @@ In&nbsp;[24]:
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[25]:
+In&nbsp;[28]:
 </div>
 <div class="inner_cell">
     <div class="input_area">
@@ -2781,10 +2876,10 @@ WARNING:astropy:MergeConflictWarning: Cannot merge meta key u&apos;null&apos; ty
 </div>
 
 <div class="output_area"><div class="prompt output_prompt">
-    Out[25]:</div>
+    Out[28]:</div>
 
 <div class="output_html rendered_html output_subarea output_pyout">
-<table id="table4494433936"><thead><tr><th>_q</th><th>_RAJ2000</th><th>_DEJ2000</th><th>RAJ2000</th><th>DEJ2000</th><th>_2MASS</th><th>Jmag</th><th>e_Jmag</th><th>Hmag</th><th>e_Hmag</th><th>Kmag</th><th>e_Kmag</th><th>Qflg</th><th>Rflg</th><th>Bflg</th><th>Cflg</th><th>Xflg</th><th>Aflg</th></tr></thead><thead><tr><th></th><th>deg</th><th>deg</th><th>deg</th><th>deg</th><th></th><th>mag</th><th>mag</th><th>mag</th><th>mag</th><th>mag</th><th>mag</th><th></th><th></th><th></th><th></th><th></th><th></th></tr></thead><tr><td>1</td><td>10.686015</td><td>41.269630</td><td>10.686015</td><td>41.269630</td><td>00424464+4116106</td><td>9.399</td><td>nan</td><td>9.985</td><td>0.070</td><td>8.429</td><td>nan</td><td>UEU</td><td>020</td><td>020</td><td>0c0</td><td>2</td><td>0</td></tr><tr><td>1</td><td>10.685657</td><td>41.269550</td><td>10.685657</td><td>41.269550</td><td>00424455+4116103</td><td>10.773</td><td>0.069</td><td>8.532</td><td>nan</td><td>8.254</td><td>nan</td><td>EUU</td><td>200</td><td>200</td><td>c00</td><td>2</td><td>0</td></tr><tr><td>1</td><td>10.685837</td><td>41.270599</td><td>10.685837</td><td>41.270599</td><td>00424460+4116141</td><td>9.880</td><td>nan</td><td>12.051</td><td>0.068</td><td>8.934</td><td>nan</td><td>UAU</td><td>020</td><td>020</td><td>0c0</td><td>2</td><td>0</td></tr><tr><td>1</td><td>10.683263</td><td>41.267456</td><td>10.683263</td><td>41.267456</td><td>00424398+4116028</td><td>12.136</td><td>0.040</td><td>9.226</td><td>nan</td><td>8.994</td><td>nan</td><td>AUU</td><td>200</td><td>100</td><td>c00</td><td>2</td><td>0</td></tr><tr><td>1</td><td>10.683465</td><td>41.269676</td><td>10.683465</td><td>41.269676</td><td>00424403+4116108</td><td>11.507</td><td>0.056</td><td>8.744</td><td>nan</td><td>8.489</td><td>nan</td><td>EUU</td><td>200</td><td>100</td><td>c00</td><td>2</td><td>0</td></tr><tr><td>3</td><td>27.238636</td><td>5.906066</td><td>27.238636</td><td>5.906066</td><td>01485727+0554218</td><td>8.961</td><td>0.027</td><td>8.607</td><td>0.044</td><td>8.581</td><td>0.034</td><td>AAA</td><td>112</td><td>111</td><td>000</td><td>0</td><td>0</td></tr><tr><td>4</td><td>40.669277</td><td>-0.014225</td><td>40.669277</td><td>-0.014225</td><td>02424062-0000512</td><td>11.795</td><td>0.023</td><td>8.801</td><td>nan</td><td>7.780</td><td>nan</td><td>EUU</td><td>200</td><td>100</td><td>c00</td><td>2</td><td>0</td></tr><tr><td>4</td><td>40.668802</td><td>-0.013064</td><td>40.668802</td><td>-0.013064</td><td>02424051-0000470</td><td>11.849</td><td>0.024</td><td>8.747</td><td>nan</td><td>8.223</td><td>nan</td><td>EUU</td><td>200</td><td>100</td><td>c00</td><td>2</td><td>0</td></tr><tr><td>4</td><td>40.669219</td><td>-0.012236</td><td>40.669219</td><td>-0.012236</td><td>02424061-0000440</td><td>12.276</td><td>0.024</td><td>9.101</td><td>nan</td><td>8.167</td><td>nan</td><td>EUU</td><td>200</td><td>100</td><td>c00</td><td>2</td><td>0</td></tr><tr><td>4</td><td>40.670761</td><td>-0.012208</td><td>40.670761</td><td>-0.012208</td><td>02424098-0000439</td><td>12.119</td><td>0.070</td><td>9.442</td><td>nan</td><td>8.886</td><td>nan</td><td>EUU</td><td>200</td><td>100</td><td>c00</td><td>2</td><td>0</td></tr><tr><td>4</td><td>40.670177</td><td>-0.012830</td><td>40.670177</td><td>-0.012830</td><td>02424084-0000461</td><td>11.381</td><td>0.173</td><td>8.636</td><td>nan</td><td>8.112</td><td>nan</td><td>EUU</td><td>200</td><td>100</td><td>c00</td><td>2</td><td>0</td></tr><tr><td>11</td><td>192.721982</td><td>41.121040</td><td>192.721982</td><td>41.121040</td><td>12505327+4107157</td><td>10.822</td><td>0.037</td><td>8.539</td><td>nan</td><td>8.242</td><td>nan</td><td>EUU</td><td>200</td><td>100</td><td>c00</td><td>2</td><td>0</td></tr><tr><td>11</td><td>192.721179</td><td>41.120201</td><td>192.721179</td><td>41.120201</td><td>12505308+4107127</td><td>9.306</td><td>0.055</td><td>8.742</td><td>0.074</td><td>8.492</td><td>0.067</td><td>EEE</td><td>222</td><td>111</td><td>000</td><td>2</td><td>0</td></tr></table>
+<table id="table4496874320"><thead><tr><th>_q</th><th>_RAJ2000</th><th>_DEJ2000</th><th>RAJ2000</th><th>DEJ2000</th><th>_2MASS</th><th>Jmag</th><th>e_Jmag</th><th>Hmag</th><th>e_Hmag</th><th>Kmag</th><th>e_Kmag</th><th>Qflg</th><th>Rflg</th><th>Bflg</th><th>Cflg</th><th>Xflg</th><th>Aflg</th></tr></thead><thead><tr><th></th><th>deg</th><th>deg</th><th>deg</th><th>deg</th><th></th><th>mag</th><th>mag</th><th>mag</th><th>mag</th><th>mag</th><th>mag</th><th></th><th></th><th></th><th></th><th></th><th></th></tr></thead><tr><td>1</td><td>10.686015</td><td>41.269630</td><td>10.686015</td><td>41.269630</td><td>00424464+4116106</td><td>9.399</td><td>nan</td><td>9.985</td><td>0.070</td><td>8.429</td><td>nan</td><td>UEU</td><td>020</td><td>020</td><td>0c0</td><td>2</td><td>0</td></tr><tr><td>1</td><td>10.685657</td><td>41.269550</td><td>10.685657</td><td>41.269550</td><td>00424455+4116103</td><td>10.773</td><td>0.069</td><td>8.532</td><td>nan</td><td>8.254</td><td>nan</td><td>EUU</td><td>200</td><td>200</td><td>c00</td><td>2</td><td>0</td></tr><tr><td>1</td><td>10.685837</td><td>41.270599</td><td>10.685837</td><td>41.270599</td><td>00424460+4116141</td><td>9.880</td><td>nan</td><td>12.051</td><td>0.068</td><td>8.934</td><td>nan</td><td>UAU</td><td>020</td><td>020</td><td>0c0</td><td>2</td><td>0</td></tr><tr><td>1</td><td>10.683263</td><td>41.267456</td><td>10.683263</td><td>41.267456</td><td>00424398+4116028</td><td>12.136</td><td>0.040</td><td>9.226</td><td>nan</td><td>8.994</td><td>nan</td><td>AUU</td><td>200</td><td>100</td><td>c00</td><td>2</td><td>0</td></tr><tr><td>1</td><td>10.683465</td><td>41.269676</td><td>10.683465</td><td>41.269676</td><td>00424403+4116108</td><td>11.507</td><td>0.056</td><td>8.744</td><td>nan</td><td>8.489</td><td>nan</td><td>EUU</td><td>200</td><td>100</td><td>c00</td><td>2</td><td>0</td></tr><tr><td>3</td><td>27.238636</td><td>5.906066</td><td>27.238636</td><td>5.906066</td><td>01485727+0554218</td><td>8.961</td><td>0.027</td><td>8.607</td><td>0.044</td><td>8.581</td><td>0.034</td><td>AAA</td><td>112</td><td>111</td><td>000</td><td>0</td><td>0</td></tr><tr><td>4</td><td>40.669277</td><td>-0.014225</td><td>40.669277</td><td>-0.014225</td><td>02424062-0000512</td><td>11.795</td><td>0.023</td><td>8.801</td><td>nan</td><td>7.780</td><td>nan</td><td>EUU</td><td>200</td><td>100</td><td>c00</td><td>2</td><td>0</td></tr><tr><td>4</td><td>40.668802</td><td>-0.013064</td><td>40.668802</td><td>-0.013064</td><td>02424051-0000470</td><td>11.849</td><td>0.024</td><td>8.747</td><td>nan</td><td>8.223</td><td>nan</td><td>EUU</td><td>200</td><td>100</td><td>c00</td><td>2</td><td>0</td></tr><tr><td>4</td><td>40.669219</td><td>-0.012236</td><td>40.669219</td><td>-0.012236</td><td>02424061-0000440</td><td>12.276</td><td>0.024</td><td>9.101</td><td>nan</td><td>8.167</td><td>nan</td><td>EUU</td><td>200</td><td>100</td><td>c00</td><td>2</td><td>0</td></tr><tr><td>4</td><td>40.670761</td><td>-0.012208</td><td>40.670761</td><td>-0.012208</td><td>02424098-0000439</td><td>12.119</td><td>0.070</td><td>9.442</td><td>nan</td><td>8.886</td><td>nan</td><td>EUU</td><td>200</td><td>100</td><td>c00</td><td>2</td><td>0</td></tr><tr><td>4</td><td>40.670177</td><td>-0.012830</td><td>40.670177</td><td>-0.012830</td><td>02424084-0000461</td><td>11.381</td><td>0.173</td><td>8.636</td><td>nan</td><td>8.112</td><td>nan</td><td>EUU</td><td>200</td><td>100</td><td>c00</td><td>2</td><td>0</td></tr><tr><td>11</td><td>192.721982</td><td>41.121040</td><td>192.721982</td><td>41.121040</td><td>12505327+4107157</td><td>10.822</td><td>0.037</td><td>8.539</td><td>nan</td><td>8.242</td><td>nan</td><td>EUU</td><td>200</td><td>100</td><td>c00</td><td>2</td><td>0</td></tr><tr><td>11</td><td>192.721179</td><td>41.120201</td><td>192.721179</td><td>41.120201</td><td>12505308+4107127</td><td>9.306</td><td>0.055</td><td>8.742</td><td>0.074</td><td>8.492</td><td>0.067</td><td>EEE</td><td>222</td><td>111</td><td>000</td><td>2</td><td>0</td></tr></table>
 </div>
 
 </div>
@@ -2805,7 +2900,7 @@ WARNING:astropy:MergeConflictWarning: Cannot merge meta key u&apos;null&apos; ty
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[26]:
+In&nbsp;[29]:
 </div>
 <div class="inner_cell">
     <div class="input_area">
@@ -2820,7 +2915,7 @@ In&nbsp;[26]:
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[27]:
+In&nbsp;[30]:
 </div>
 <div class="inner_cell">
     <div class="input_area">
@@ -2838,7 +2933,7 @@ In&nbsp;[27]:
 
 
 <div class="output_area"><div class="prompt output_prompt">
-    Out[27]:</div>
+    Out[30]:</div>
 
 
 <div class="output_text output_subarea output_pyout">
@@ -2857,7 +2952,7 @@ In&nbsp;[27]:
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[34]:
+In&nbsp;[31]:
 </div>
 <div class="inner_cell">
     <div class="input_area">
@@ -2879,10 +2974,10 @@ In&nbsp;[34]:
 
 
 <div class="output_area"><div class="prompt output_prompt">
-    Out[34]:</div>
+    Out[31]:</div>
 
 <div class="output_html rendered_html output_subarea output_pyout">
-<table id="table4494424784"><thead><tr><th>_RAJ2000</th><th>_DEJ2000</th></tr></thead><thead><tr><th>deg</th><th>deg</th></tr></thead><tr><td>266.404929574</td><td>-28.9362178833</td></tr><tr><td>290.934395293</td><td>14.5067674093</td></tr><tr><td>287.471975893</td><td>9.07173444604</td></tr></table>
+<table id="table4427466512"><thead><tr><th>_RAJ2000</th><th>_DEJ2000</th></tr></thead><thead><tr><th>deg</th><th>deg</th></tr></thead><tr><td>266.404929574</td><td>-28.9362178833</td></tr><tr><td>290.934395293</td><td>14.5067674093</td></tr><tr><td>287.471975893</td><td>9.07173444604</td></tr></table>
 </div>
 
 </div>
@@ -2894,7 +2989,7 @@ In&nbsp;[34]:
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[30]:
+In&nbsp;[32]:
 </div>
 <div class="inner_cell">
     <div class="input_area">
@@ -2911,7 +3006,7 @@ In&nbsp;[30]:
 
 
 <div class="output_area"><div class="prompt output_prompt">
-    Out[30]:</div>
+    Out[32]:</div>
 
 
 <div class="output_text output_subarea output_pyout">
@@ -2934,7 +3029,7 @@ In&nbsp;[30]:
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[38]:
+In&nbsp;[33]:
 </div>
 <div class="inner_cell">
     <div class="input_area">
@@ -2951,7 +3046,7 @@ In&nbsp;[38]:
 
 
 <div class="output_area"><div class="prompt output_prompt">
-    Out[38]:</div>
+    Out[33]:</div>
 
 
 <div class="output_text output_subarea output_pyout">
@@ -2973,7 +3068,7 @@ TableList with 4 tables:
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[39]:
+In&nbsp;[34]:
 </div>
 <div class="inner_cell">
     <div class="input_area">
@@ -2989,10 +3084,10 @@ In&nbsp;[39]:
 
 
 <div class="output_area"><div class="prompt output_prompt">
-    Out[39]:</div>
+    Out[34]:</div>
 
 <div class="output_html rendered_html output_subarea output_pyout">
-<table id="table4494659024"><thead><tr><th>_q</th><th>_RAJ2000</th><th>_DEJ2000</th><th>IVS</th><th>VCS4</th><th>RAJ2000</th><th>e_RAJ2000</th><th>DEJ2000</th><th>e_DEJ2000</th><th>Nobs</th><th>Band</th></tr></thead><thead><tr><th></th><th>deg</th><th>deg</th><th></th><th></th><th>&quot;h:m:s&quot;</th><th>mas</th><th>&quot;d:m:s&quot;</th><th>mas</th><th></th><th></th></tr></thead><tr><td>4</td><td>268.137946</td><td>-29.945806</td><td>1749-299</td><td>J1752-2956</td><td>17 52 33.107050</td><td>12.28</td><td>-29 56 44.90017</td><td>19.41</td><td>6</td><td>X/S</td></tr></table>
+<table id="table4497532880"><thead><tr><th>_q</th><th>_RAJ2000</th><th>_DEJ2000</th><th>IVS</th><th>VCS4</th><th>RAJ2000</th><th>e_RAJ2000</th><th>DEJ2000</th><th>e_DEJ2000</th><th>Nobs</th><th>Band</th></tr></thead><thead><tr><th></th><th>deg</th><th>deg</th><th></th><th></th><th>&quot;h:m:s&quot;</th><th>mas</th><th>&quot;d:m:s&quot;</th><th>mas</th><th></th><th></th></tr></thead><tr><td>4</td><td>268.137946</td><td>-29.945806</td><td>1749-299</td><td>J1752-2956</td><td>17 52 33.107050</td><td>12.28</td><td>-29 56 44.90017</td><td>19.41</td><td>6</td><td>X/S</td></tr></table>
 </div>
 
 </div>
@@ -3004,7 +3099,7 @@ In&nbsp;[39]:
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[40]:
+In&nbsp;[35]:
 </div>
 <div class="inner_cell">
     <div class="input_area">
@@ -3020,10 +3115,10 @@ In&nbsp;[40]:
 
 
 <div class="output_area"><div class="prompt output_prompt">
-    Out[40]:</div>
+    Out[35]:</div>
 
 <div class="output_html rendered_html output_subarea output_pyout">
-<table id="table4496761360"><thead><tr><th>_q</th><th>_RAJ2000</th><th>_DEJ2000</th><th>VCS1</th><th>IVS</th><th>RAJ2000</th><th>DEJ2000</th><th>e_RAJ2000</th><th>e_DEJ2000</th><th>Corr</th><th>Num</th></tr></thead><thead><tr><th></th><th>deg</th><th>deg</th><th></th><th></th><th>&quot;h:m:s&quot;</th><th>&quot;d:m:s&quot;</th><th>mas</th><th>mas</th><th></th><th></th></tr></thead><tr><td>11</td><td>290.644581</td><td>15.502787</td><td>J1922+1530</td><td>1920+154</td><td>19 22 34.699349</td><td>+15 30 10.03266</td><td>1.2334</td><td>1.1451</td><td>-0.0060</td><td>53</td></tr><tr><td>11</td><td>291.164399</td><td>15.678873</td><td>J1924+1540</td><td>1922+155</td><td>19 24 39.455874</td><td>+15 40 43.94111</td><td>0.5730</td><td>0.6869</td><td>-0.0624</td><td>70</td></tr></table>
+<table id="table4500572240"><thead><tr><th>_q</th><th>_RAJ2000</th><th>_DEJ2000</th><th>VCS1</th><th>IVS</th><th>RAJ2000</th><th>DEJ2000</th><th>e_RAJ2000</th><th>e_DEJ2000</th><th>Corr</th><th>Num</th></tr></thead><thead><tr><th></th><th>deg</th><th>deg</th><th></th><th></th><th>&quot;h:m:s&quot;</th><th>&quot;d:m:s&quot;</th><th>mas</th><th>mas</th><th></th><th></th></tr></thead><tr><td>11</td><td>290.644581</td><td>15.502787</td><td>J1922+1530</td><td>1920+154</td><td>19 22 34.699349</td><td>+15 30 10.03266</td><td>1.2334</td><td>1.1451</td><td>-0.0060</td><td>53</td></tr><tr><td>11</td><td>291.164399</td><td>15.678873</td><td>J1924+1540</td><td>1922+155</td><td>19 24 39.455874</td><td>+15 40 43.94111</td><td>0.5730</td><td>0.6869</td><td>-0.0624</td><td>70</td></tr></table>
 </div>
 
 </div>
