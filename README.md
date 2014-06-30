@@ -10,4 +10,4 @@ Tutorials and notes from the ESO python demonstration series
  * [June 2: Intro to Matplotlib (nice plots)](http://eso-python.github.io/ESOPythonTutorials/ESOPythonDemoDay5_matplotlib_BerndHusemann_part1.html)
  * [June 2: Intro to Matplotlib (3D plots)](http://eso-python.github.io/ESOPythonTutorials/ESOPythonDemoDay5_matplotlib_BerndHusemann_part2.html)
  * [June 16: Package Management](http://eso-python.github.io/ESOPythonTutorials/ESOPythonDemoDay6_PackageManagement.html)
-
+ * [June 30: Astroquery](http://eso-python.github.io/ESOPythonTutorials/ESOPythonDemoDay7_Astroquery_ESO_Simbad_Vizier.html)
