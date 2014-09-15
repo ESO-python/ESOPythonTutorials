@@ -12,3 +12,4 @@ Tutorials and notes from the ESO python demonstration series
  * [June 16: Package Management](http://eso-python.github.io/ESOPythonTutorials/ESOPythonDemoDay6_PackageManagement.html)
  * [June 30: Astroquery](http://eso-python.github.io/ESOPythonTutorials/ESOPythonDemoDay7_Astroquery_ESO_Simbad_Vizier.html)
  * July 28: Pandas
+ * [September 15: MCMC with emcee](http://eso-python.github.io/ESOPythonTutorials/ESOPythonDemoDay8_MCMC_with_emcee.html)
