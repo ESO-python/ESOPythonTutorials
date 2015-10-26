@@ -14,3 +14,4 @@ Tutorials and notes from the ESO python demonstration series
  * July 28: Pandas
  * [September 15: MCMC with emcee](http://eso-python.github.io/ESOPythonTutorials/ESOPythonDemoDay8_MCMC_with_emcee.html)
  * [October 20: FITS Image IO and basics](http://eso-python.github.io/ESOPythonTutorials/FITS-images.html)
+ * [October 26, 2015: plotting, etc](https://github.com/ESO-python/ESOPythonTutorials/blob/master/notes/notes_2015_10_26.rst)
