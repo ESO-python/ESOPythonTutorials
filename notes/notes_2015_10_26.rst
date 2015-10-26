@@ -1,0 +1,85 @@
+October 26, 2015 code coffee
+----------------------------
+
+Table reading review:
+
+.. code-block:: python
+
+    from astropy.table import Table
+
+    # doesn't work:
+    tbl = Table.read('Dunham2011_NH3.ipac')
+    
+    # need to specify format:
+    tbl = Table.read('Dunham2011_NH3.ipac', format='ascii.ipac')
+    # show it in the browser
+    tbl.show_in_browser(jsviewer=True)
+
+    # for simpler files, use np.loadtxt or genfromtxt:
+    np.loadtxt?
+    np.genfromtxt?
+
+Plotting:
+
+.. code-block:: python
+
+    import pylab as pl
+    pl.plot([0,1])
+    
+    # alternative
+    from matplotlib import pyplot as plt
+
+    # don't do this!
+    #from pylab import *
+
+    # rc_files can be used to store default parameters:
+    pl.matplotlib.rc_file('/Users/adam/.matplotlib/pubfiguresrc')
+
+    # you can also change them manually
+    # (but some fonts don't work!)
+    pl.rcParams['font.family'] = 'crm10'
+    pl.title("This is a title")
+
+    # some advanced mixture of latex and regular text:
+    pl.title(""+" ".join(["$\\mathrm{{{x}}}$".format(x=x) for x in "This is a Title".split()]) + " and so is this")
+
+    # change figure size
+    pl.figure(figsize=(16,4))
+
+    # different interpolations
+    x = np.random.randn(10,10)
+    pl.imshow(x, interpolation='bilinear')
+    pl.imshow(x, interpolation='nearest')
+
+    # can use built-in styles (this one is weird...)
+    pl.style.use('ggplot')
+
+    # try different colormaps (viridis is only in matplotlib >= 2.0)
+    pl.imshow(x, cmap='viridis')
+    pl.imshow(x, cmap='summer')
+    pl.imshow(x, cmap='gray')
+    pl.imshow(x, cmap='jet')
+    pl.imshow(x, cmap='cubehelix')
+
+
+Use aplpy for FITS plotting:
+
+.. code-block:: python
+
+    import aplpy
+    F = aplpy.FITSFigure('w51n-cont-1mm.fits')
+
+    # show with different colors
+    F.show_grayscale()
+    F.show_colorscale()
+    F.show_colorscale(cmap='cubehelix')
+
+
+    # overlay coordinates
+    from astropy import coordinates
+
+    w51 = coordinates.SkyCoord.from_name('W51n')
+    F.show_markers([w51.ra.deg], [w51.dec.deg])
+
+    # Show region files
+    F.show_regions('mehringer1994.reg')
