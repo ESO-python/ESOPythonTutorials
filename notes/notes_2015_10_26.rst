@@ -1,6 +1,11 @@
 October 26, 2015 code coffee
 ----------------------------
 
+We discussed `astropy 1.1's new cutout functionality
+<https://astropy.readthedocs.org/en/latest/nddata/utils.html>`_
+and more topics below.
+
+
 Table reading review:
 
 .. code-block:: python
