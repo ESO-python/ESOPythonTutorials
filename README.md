@@ -1,6 +1,8 @@
 ESOPythonTutorials
 ==================
 
+[![Join the chat at https://gitter.im/ESO-python/ESOPythonTutorials](https://badges.gitter.im/ESO-python/ESOPythonTutorials.svg)](https://gitter.im/ESO-python/ESOPythonTutorials?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 Tutorials and notes from the ESO python demonstration series
 
  * [May 5: Intro, astropy units](http://eso-python.github.io/ESOPythonTutorials/ESOPythonDemoDay1.html)
